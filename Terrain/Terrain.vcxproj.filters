@@ -21,8 +21,5 @@
     <ClInclude Include="noise\perlin.h">
       <Filter>noise</Filter>
     </ClInclude>
-    <ClInclude Include="WindowCreator.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
