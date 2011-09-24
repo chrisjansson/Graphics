@@ -39,9 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../SFML/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../SFML/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -54,6 +58,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,6 +80,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="noise\perlin.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="noise\perlin.h" />
+    <ClInclude Include="WindowCreator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
