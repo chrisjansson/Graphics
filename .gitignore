@@ -16,6 +16,8 @@ Thumbs.db
 *.suo
 
 *.sdf
+*.opensdf
+
 
 # Project User Options
 *.user
@@ -23,6 +25,7 @@ Thumbs.db
 # Build Directories
 bin/
 obj/
+Debug/
 
 # .webinfo files are user-specific mappings for project endpoints
 # http://support.microsoft.com/kb/830611
