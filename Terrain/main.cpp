@@ -21,20 +21,39 @@ const float vertexPositions[] = {
 
 GLuint bufferObject;
 
+void InitializeBufferObject()
+{
+	glewInit();
+
+	glGenBuffers(1, &bufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
+
+	NoiseTerrain2D terrain(128, 128, 10, 4.f, 5.f, 4711);
+	terrain.GenerateData();
+	const float* vertices = LinesFromData(terrain.GetData(), 128, 128);
+	
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*(128*127*2)*6, vertices, GL_STATIC_DRAW);
+}
+
 void Render() 
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Apply some transformations
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0.f, 0.f, -10.f);
+
+	gluLookAt(200, 64, 50, 64, 64, 0, 0, 0, 1);
+
+	//glTranslatef(-64, -64, 0);
+
+	//glTranslatef(0.f, 0.f, -400.f);
 
 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_LINES, 0, (128*127*2)*2);
 
 	glDisableVertexAttribArray(0);
 
@@ -43,12 +62,6 @@ void Render()
 
 void Init()
 {
-	glewInit();
-
-	glGenBuffers(1, &bufferObject);
-	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexPositions), vertexPositions, GL_STATIC_DRAW);
-	
 	// Set color and depth clear value
     glClearDepth(1.f);
     glClearColor(0.f, 0.f, 0.f, 0.f);
@@ -58,6 +71,8 @@ void Init()
     glDepthMask(GL_TRUE);
 
 	ReSize(800, 600);
+
+	InitializeBufferObject();
 }
 
 //void InitializeVertexBuffer()

@@ -1,5 +1,29 @@
 #include "VerticesFromDataGenerator.h"
 
+const float* PointsFromData(const float* data, int width, int height) 
+{
+	int nrPoints = width*height;
+	float* vertices = new float[nrPoints*3];
+
+	int pointNr = 0;
+	for(int i=0; i < width; i++) 
+	{
+		for(int j=0; j < height; j++)
+		{
+			int offset = j + i * height;
+			int pointOffset = pointNr * 3;
+
+			vertices[pointOffset + 0] = (float)i;
+			vertices[pointOffset + 1] = (float)j;
+			vertices[pointOffset + 2] = data[offset];
+
+			pointNr++;
+		}
+	}
+
+	return vertices;
+}
+
 const float* LinesFromData(const float* data, int width, int height) 
 {
 	int nrLines = (width-1) * (height) + width*(height-1);
