@@ -8,6 +8,9 @@
     <Filter Include="noise">
       <UniqueIdentifier>{bfc0dd36-a3fd-4211-9c1d-05201621973d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NoiseTerrain">
+      <UniqueIdentifier>{b77717c5-af05-4aa5-ad90-ac21c33d5fa6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -16,10 +19,22 @@
     <ClCompile Include="noise\perlin.cpp">
       <Filter>noise</Filter>
     </ClCompile>
+    <ClCompile Include="NoiseTerrain.cpp">
+      <Filter>NoiseTerrain</Filter>
+    </ClCompile>
+    <ClCompile Include="VerticeFromDataGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="noise\perlin.h">
       <Filter>noise</Filter>
+    </ClInclude>
+    <ClInclude Include="NoiseTerrain.h">
+      <Filter>NoiseTerrain</Filter>
+    </ClInclude>
+    <ClInclude Include="VerticesFromDataGenerator.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

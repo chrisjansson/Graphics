@@ -1,5 +1,8 @@
 #include <iostream>
+#include <GL\glew.h>
 #include <SFML/window.hpp>
+#include "NoiseTerrain.h"
+#include "VerticesFromDataGenerator.h"
 
 void ReSize(int width, int height) 
 {
@@ -9,52 +12,43 @@ void ReSize(int width, int height)
 	gluPerspective (50.0, (float)width/(float)height, 1.f, 500.f);
 }
 
+
+const float vertexPositions[] = {
+    0.75f, 0.75f, 0.0f, 1.0f,
+    0.75f, -0.75f, 0.0f, 1.0f,
+    -0.75f, -0.75f, 0.0f, 1.0f,
+};
+
+GLuint bufferObject;
+
 void Render() 
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Apply some transformations
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef(0.f, 0.f, -200.f);
+	glTranslatef(0.f, 0.f, -10.f);
 
-	// Draw a cube
-	glBegin(GL_QUADS);
-	{
-		glVertex3f(-50.f, -50.f, -50.f);
-		glVertex3f(-50.f,  50.f, -50.f);
-		glVertex3f( 50.f,  50.f, -50.f);
-		glVertex3f( 50.f, -50.f, -50.f);
+	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
 
-		glVertex3f(-50.f, -50.f, 50.f);
-		glVertex3f(-50.f,  50.f, 50.f);
-		glVertex3f( 50.f,  50.f, 50.f);
-		glVertex3f( 50.f, -50.f, 50.f);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-		glVertex3f(-50.f, -50.f, -50.f);
-		glVertex3f(-50.f,  50.f, -50.f);
-		glVertex3f(-50.f,  50.f,  50.f);
-		glVertex3f(-50.f, -50.f,  50.f);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		glVertex3f(50.f, -50.f, -50.f);
-		glVertex3f(50.f,  50.f, -50.f);
-		glVertex3f(50.f,  50.f,  50.f);
-		glVertex3f(50.f, -50.f,  50.f);
+	glDisableVertexAttribArray(0);
 
-		glVertex3f(-50.f, -50.f,  50.f);
-		glVertex3f(-50.f, -50.f, -50.f);
-		glVertex3f( 50.f, -50.f, -50.f);
-		glVertex3f( 50.f, -50.f,  50.f);
-
-		glVertex3f(-50.f, 50.f,  50.f);
-		glVertex3f(-50.f, 50.f, -50.f);
-		glVertex3f( 50.f, 50.f, -50.f);
-		glVertex3f( 50.f, 50.f,  50.f);
-	}
-	glEnd();
+	glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 }
 
 void Init()
 {
+	glewInit();
+
+	glGenBuffers(1, &bufferObject);
+	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertexPositions), vertexPositions, GL_STATIC_DRAW);
+	
 	// Set color and depth clear value
     glClearDepth(1.f);
     glClearColor(0.f, 0.f, 0.f, 0.f);
@@ -66,6 +60,19 @@ void Init()
 	ReSize(800, 600);
 }
 
+//void InitializeVertexBuffer()
+//{
+//	NoiseTerrain2D terrain(1024, 1024, 10, 4.f, 1.f, 4711);
+//	terrain.GenerateData();
+//	const float* vertices = LinesFromData(terrain.GetData(), 1024, 1024);
+//
+//	glGenBuffers(1, &positionBufferObject);
+//    
+//    glBindBuffer(GL_ARRAY_BUFFER, positionBufferObject);
+//	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//}
+
 int main(int argc, char** argv) 
 {
 	sf::WindowSettings settings;
@@ -75,6 +82,8 @@ int main(int argc, char** argv)
 	sf::Window app(sf::VideoMode(800, 600, 32), "SFML OpenGL", sf::Style::Resize, settings);
 	
 	Init();
+
+
 
 	while(app.IsOpened()) 
 	{
@@ -98,6 +107,8 @@ int main(int argc, char** argv)
 
 		app.Display();
 	}
+
+	glDeleteBuffers(1, &bufferObject);
 
 	return 0;
 }

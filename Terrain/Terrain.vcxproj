@@ -39,13 +39,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../SFML/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(ProjectDir)/../GLEW/include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../SFML/lib;$(SolutionDir)../GLEW/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../SFML/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(ProjectDir)/../GLEW;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)../SFML/lib;$(SolutionDir)../GLEW/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -53,12 +53,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32sd.lib;sfml-main-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,7 +69,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,10 +80,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NoiseTerrain.cpp" />
     <ClCompile Include="noise\perlin.cpp" />
+    <ClCompile Include="VerticeFromDataGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NoiseTerrain.h" />
     <ClInclude Include="noise\perlin.h" />
+    <ClInclude Include="VerticesFromDataGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

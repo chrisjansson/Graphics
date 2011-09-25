@@ -26,6 +26,7 @@ Thumbs.db
 bin/
 obj/
 Debug/
+Release/
 ipch/
 
 # .webinfo files are user-specific mappings for project endpoints
