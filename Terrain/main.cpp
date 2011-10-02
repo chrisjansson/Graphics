@@ -31,6 +31,7 @@ void ReSize(int width, int height)
 }
 
 GLuint bufferObject;
+GLuint* indices;
 
 void InitializeBufferObject()
 {
@@ -42,15 +43,58 @@ void InitializeBufferObject()
 	NoiseTerrain2D terrain(128, 128, 10, 4.f, 10.f, 4711);
 	terrain.GenerateData();
 	/*const float* vertices = LinesFromData(terrain.GetData(), 128, 128);*/
-	const float* vertices = TrianglesFromData(terrain.GetData(), 128, 128);
+	//const float* vertices = TrianglesFromData(terrain.GetData(), 128, 128);
+	//const glm::vec3* vertices = TrianglesFromDataGLM(terrain.GetData(), 128, 128);
 
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*(128-1)*(128-1)*3, &vertices[0], GL_STATIC_DRAW);
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)*(128*127*2)*6, vertices, GL_STATIC_DRAW);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*(127*127)*9, vertices, GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)*(127*127)*9, vertices, GL_STATIC_DRAW);
+
+	VertexPositionNormal* vertices;
+
+	VerticesAndIndicesFromData(terrain.GetData(), 128, 128, &vertices, &indices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionNormal)*128*128, &(vertices[0].Position), GL_STATIC_DRAW);
 
 	delete[] vertices;
 }
 
 sf::Clock clockObject;
+
+GLuint program;
+void LoadShaders()
+{
+	std::string vertexShaderString = LoadShaderStringFromFile("data/DirVertexLighting_PN.vert");
+	std::string fragmentShaderString = LoadShaderStringFromFile("data/ColorPassthrough.frag");
+
+	GLuint vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderString.c_str());
+	GLuint fragmentShader = CreateShader(GL_FRAGMENT_SHADER, fragmentShaderString.c_str());
+
+	std::vector<GLuint> shaders;
+	shaders.push_back(vertexShader);
+	shaders.push_back(fragmentShader);
+
+	program = CreateProgram(shaders);
+}
+
+void Render2() 
+{
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+	glUseProgram(program);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), 0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), (void*)sizeof(glm::vec3));
+    
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glUseProgram(0);
+}
 
 void Render() 
 {
@@ -66,10 +110,11 @@ void Render()
 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), 0);
 
 	//glDrawArrays(GL_LINES, 0, (128*127*2)*2);
-	glDrawArrays(GL_TRIANGLES, 0, 127*127*4);
+	//glDrawArrays(GL_TRIANGLES, 0, 127*127*4);
+	glDrawElements(GL_TRIANGLES, (127*127*6), GL_UNSIGNED_INT, indices);
 
 	glDisableVertexAttribArray(0);
 
@@ -90,7 +135,7 @@ void Init()
 
 	InitializeBufferObject();
 
-	loadShaders();
+	//LoadShaders();
 }
 
 float oldTime=0;

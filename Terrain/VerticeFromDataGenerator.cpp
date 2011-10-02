@@ -71,6 +71,110 @@ const float* LinesFromData(const float* data, int width, int height)
 	return vertices;
 }
 
+const glm::vec3* TrianglesFromDataGLM(const float* data, int width, int height)
+{
+	int nrTriangles = (width-1)*(height-1);
+	glm::vec3* vertices = new glm::vec3[nrTriangles*3];
+
+	float wOffset = width/2.f;
+	float hOffset = height/2.f; 
+
+	int triangles = 0;
+	for(int i=0; i < width-1; i++) 
+	{
+		for(int j=0; j < height-1; j++)
+		{
+			int offset = j + i * height;
+			vertices[triangles].x = i - wOffset;
+			vertices[triangles].y = j - hOffset;
+			vertices[triangles].z = data[offset];
+
+			triangles++;
+
+			offset = j + (i+1) * height;
+			vertices[triangles].x = i + 1 - wOffset;
+			vertices[triangles].y = j - hOffset;
+			vertices[triangles].z = data[offset];
+
+			triangles++;
+
+			offset = j + 1 + (i + 1) * height;
+			vertices[triangles].x = i + 1 - wOffset;
+			vertices[triangles].y = j + 1 - hOffset;
+			vertices[triangles].z = data[offset];
+
+			triangles++;
+		}
+	}
+	return vertices;
+}
+
+void VerticesAndIndicesFromData(const float* data, int width, int height, VertexPositionNormal** vertices, GLuint** indices)
+{
+	int nrVertices = width*height;
+	(*vertices) = new VertexPositionNormal[nrVertices];
+
+	float wOffset = width/2.f;
+	float hOffset = height/2.f;
+
+	for(int i=0; i<width; i++)
+	{
+		for(int j=0; j<height; j++)
+		{
+			int dataOffset = j + i * height;
+						
+			(*vertices)[dataOffset].Position.x = i - wOffset;
+			(*vertices)[dataOffset].Position.y = j - hOffset;
+			(*vertices)[dataOffset].Position.z = data[dataOffset];
+		}
+	}
+
+	int nrTriangles = (width-1)*(height-1)*2;
+	(*indices) = new GLuint[nrTriangles*3];
+
+	int quadNr = 0;
+	for(int i=0; i<width-1; i++)
+	{
+		for(int j=0; j<height-1; j++)
+		{
+			GLuint vertexOffset = j + i * height;
+			(*indices)[quadNr * 6 + 0] = vertexOffset;
+			(*indices)[quadNr * 6 + 3] = vertexOffset;
+			
+			vertexOffset = j + (i + 1) * height;
+			(*indices)[quadNr * 6 + 4] = vertexOffset;
+
+			vertexOffset = j + 1 + (i + 1)*height;
+			(*indices)[quadNr * 6 + 1] = vertexOffset;
+			(*indices)[quadNr * 6 + 5] = vertexOffset;
+
+			vertexOffset = j + 1 + i * height;
+			(*indices)[quadNr * 6 + 2] = vertexOffset;	
+
+			quadNr++;
+		}
+	}
+
+	for(int i=0; i<nrTriangles*3; i+=3)
+	{
+		GLuint verticeIndex = (*indices)[i + 0];
+		glm::vec3 a = (*vertices)[(*indices)[i + 0]].Position;
+		glm::vec3 b = (*vertices)[(*indices)[i + 1]].Position;
+		glm::vec3 c = (*vertices)[(*indices)[i + 2]].Position;
+
+		glm::vec3 normal = glm::normalize(glm::cross(c - a, b - a));
+
+		(*vertices)[(*indices)[i + 0]].Normal += normal;
+		(*vertices)[(*indices)[i + 1]].Normal += normal;
+		(*vertices)[(*indices)[i + 2]].Normal += normal;
+	}
+
+	for(int i=0; i < nrVertices; i++) 
+	{
+		(*vertices)[i].Normal = glm::normalize((*vertices)[i].Normal);
+	}
+}
+
 const float* TrianglesFromData(const float* data, int width, int height)
 {
 	int nrQuads = (width - 1)*(height - 1);
