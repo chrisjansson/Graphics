@@ -11,6 +11,12 @@
     <Filter Include="NoiseTerrain">
       <UniqueIdentifier>{b77717c5-af05-4aa5-ad90-ac21c33d5fa6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GLEW">
+      <UniqueIdentifier>{fc227223-7910-4ea3-8a47-55b1d4ef0281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{fa7e9af0-111a-4940-a5eb-f17d06da3175}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -25,6 +31,12 @@
     <ClCompile Include="VerticeFromDataGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\GLEW\src\glew.c">
+      <Filter>GLEW</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderCompiler.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="noise\perlin.h">
@@ -35,6 +47,9 @@
     </ClInclude>
     <ClInclude Include="VerticesFromDataGenerator.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderCompiler.h">
+      <Filter>Shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

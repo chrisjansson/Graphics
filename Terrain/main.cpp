@@ -1,8 +1,26 @@
-#include <iostream>
 #include <GL\glew.h>
+#include <iostream>
 #include <SFML/window.hpp>
 #include "NoiseTerrain.h"
 #include "VerticesFromDataGenerator.h"
+#include "ShaderCompiler.h"
+
+#include <glm\glm.hpp>
+
+void loadShaders() 
+{
+	std::string vertexShaderString = LoadShaderStringFromFile("data/VertexColors.vert");
+	std::string fragmentShaderString = LoadShaderStringFromFile("data/VertexColors.frag");
+
+	GLuint vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderString.c_str());
+	GLuint fragmentShader = CreateShader(GL_FRAGMENT_SHADER, fragmentShaderString.c_str());
+
+	std::vector<GLuint> shaders;
+	shaders.push_back(vertexShader);
+	shaders.push_back(fragmentShader);
+
+	CreateProgram(shaders);
+}
 
 void ReSize(int width, int height) 
 {
@@ -71,6 +89,8 @@ void Init()
 	ReSize(800, 600);
 
 	InitializeBufferObject();
+
+	loadShaders();
 }
 
 float oldTime=0;
@@ -79,12 +99,16 @@ void PrintFPS()
 {
 	float time = clockObject.GetElapsedTime();
 	float dT = time - oldTime;
-	frames++;
+	
 	if(dT > 1)
 	{
 		std::cout << frames << std::endl;
 		oldTime = time;
 		frames = 0;
+	} 
+	else 
+	{
+		frames++;
 	}
 }
 
@@ -97,6 +121,8 @@ int main(int argc, char** argv)
 	sf::Window app(sf::VideoMode(800, 600, 32), "SFML OpenGL", sf::Style::Resize, settings);
 	
 	Init();
+
+	fprintf(stderr, "Hello stderr world!");
 
 	while(app.IsOpened()) 
 	{
