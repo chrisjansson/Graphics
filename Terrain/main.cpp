@@ -6,6 +6,8 @@
 #include "ShaderCompiler.h"
 
 #include <glm\glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 void loadShaders() 
 {
@@ -26,8 +28,9 @@ void ReSize(int width, int height)
 {
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective (50.0, (float)width/(float)height, 1.f, 500.f);
+
+	glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
+	glLoadMatrixf(glm::value_ptr(projectionMatrix));
 }
 
 GLuint bufferObject;
@@ -101,11 +104,11 @@ void Render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// Apply some transformations
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 
-	gluLookAt(0, 100, 100, 0, 1, 0, 0, 0, 1);
-	
-	glRotatef(clockObject.GetElapsedTime()*10, 0.0f, 0.0f, 1.0f);
+	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 100.f), glm::vec3(0.f, 1.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
+	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, clockObject.GetElapsedTime()*10, glm::vec3(0.f, 0.f, 1.f));
+
+	glLoadMatrixf(glm::value_ptr(rotationMatrix));
 
 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
 
