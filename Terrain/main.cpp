@@ -9,21 +9,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-void loadShaders() 
-{
-	std::string vertexShaderString = LoadShaderStringFromFile("data/VertexColors.vert");
-	std::string fragmentShaderString = LoadShaderStringFromFile("data/VertexColors.frag");
-
-	GLuint vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderString.c_str());
-	GLuint fragmentShader = CreateShader(GL_FRAGMENT_SHADER, fragmentShaderString.c_str());
-
-	std::vector<GLuint> shaders;
-	shaders.push_back(vertexShader);
-	shaders.push_back(fragmentShader);
-
-	CreateProgram(shaders);
-}
-
 void ReSize(int width, int height) 
 {
 	glViewport(0, 0, width, height);
@@ -79,20 +64,72 @@ void LoadShaders()
 	program = CreateProgram(shaders);
 }
 
+glm::vec4 g_lightDirection(-1.f, 0.f, -1.0f, 0.0f);
+
+GLuint dirToLightUnif;
+GLuint modelToCameraMatrixUnif;
+GLuint normalModelToCameraMatrixUnif;
+GLuint lightIntensityUnif;
+
+GLuint g_projectionUniformBuffer = 0;
+
+struct ProjectionBlock
+{
+	glm::mat4 cameraToClipMatrix;
+};
+
+void ReSize2(int width, int height) 
+{
+	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION);
+
+	glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
+
+	ProjectionBlock projData;
+	projData.cameraToClipMatrix = projectionMatrix;
+
+	glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(ProjectionBlock), &projData);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+}
+
+void GetUniformLocations()
+{
+	modelToCameraMatrixUnif = glGetUniformLocation(program, "modelToCameraMatrix");
+	normalModelToCameraMatrixUnif = glGetUniformLocation(program, "normalModelToCameraMatrix");
+	dirToLightUnif = glGetUniformLocation(program, "dirToLight");
+	lightIntensityUnif = glGetUniformLocation(program, "lightIntensity");
+
+	GLuint projectionBlock = glGetUniformBlockIndex(program, "Projection");
+	glUniformBlockBinding(program, projectionBlock, 2);
+}
+
 void Render2() 
 {
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+	glClearDepth(1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 100.f), glm::vec3(0.f, 1.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
+	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, clockObject.GetElapsedTime()*10, glm::vec3(0.f, 0.f, 1.f));
+
+	glm::vec4 lightDirCameraSpace = modelViewMatrix * g_lightDirection;
     
 	glUseProgram(program);
     
+	glUniform3fv(dirToLightUnif, 1, glm::value_ptr(lightDirCameraSpace));
+	glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(rotationMatrix));
+	glm::mat3 normMatrix(rotationMatrix);
+	glUniformMatrix3fv(normalModelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(normMatrix));
+	glUniform4f(lightIntensityUnif, 1.0f, 1.0f, 1.0f, 1.0f);
+
     glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), 0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), (void*)sizeof(glm::vec3));
     
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawElements(GL_TRIANGLES, (127*127*6), GL_UNSIGNED_INT, indices);
     
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
@@ -134,11 +171,22 @@ void Init()
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
 
-	ReSize(800, 600);
-
 	InitializeBufferObject();
 
-	//LoadShaders();
+	LoadShaders();
+	GetUniformLocations();
+
+		glGenBuffers(1, &g_projectionUniformBuffer);
+	glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
+	glBufferData(GL_UNIFORM_BUFFER, sizeof(ProjectionBlock), NULL, GL_DYNAMIC_DRAW);
+
+	//Bind the static buffers.
+	glBindBufferRange(GL_UNIFORM_BUFFER, 2, g_projectionUniformBuffer,
+		0, sizeof(ProjectionBlock));
+
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	ReSize2(800, 600);
 }
 
 float oldTime=0;
@@ -186,11 +234,11 @@ int main(int argc, char** argv)
                 app.Close();
 
 			if (event.Type == sf::Event::Resized)
-				ReSize(event.Size.Width, event.Size.Height);
+				ReSize2(event.Size.Width, event.Size.Height);
 		}
 		app.SetActive();
 
-		Render();
+		Render2();
 
 		PrintFPS();
 
