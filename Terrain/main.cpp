@@ -5,9 +5,13 @@
 #include "VerticesFromDataGenerator.h"
 #include "ShaderCompiler.h"
 
+#include "Shader.h"
+
 #include <glm\glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+
 
 void ReSize(int width, int height) 
 {
@@ -21,6 +25,9 @@ void ReSize(int width, int height)
 GLuint bufferObject;
 GLuint* indices;
 
+int width2 = 128;
+int height2 = 128;
+
 void InitializeBufferObject()
 {
 	glewInit();
@@ -28,20 +35,14 @@ void InitializeBufferObject()
 	glGenBuffers(1, &bufferObject);
 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
 
-	NoiseTerrain2D terrain(128, 128, 10, 4.f, 10.f, 4711);
-	terrain.GenerateData();
-	/*const float* vertices = LinesFromData(terrain.GetData(), 128, 128);*/
-	//const float* vertices = TrianglesFromData(terrain.GetData(), 128, 128);
-	//const glm::vec3* vertices = TrianglesFromDataGLM(terrain.GetData(), 128, 128);
 
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*(128-1)*(128-1)*3, &vertices[0], GL_STATIC_DRAW);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)*(128*127*2)*6, vertices, GL_STATIC_DRAW);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)*(127*127)*9, vertices, GL_STATIC_DRAW);
+
+	NoiseTerrain2D terrain(width2, height2, 10, 6.f, 10.f, 4711);
+	terrain.GenerateData();
 
 	VertexPositionNormal* vertices;
-
-	VerticesAndIndicesFromData(terrain.GetData(), 128, 128, &vertices, &indices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionNormal)*128*128, &(vertices[0].Position), GL_STATIC_DRAW);
+	VerticesAndIndicesFromData(terrain.GetData(), width2, height2, &vertices, &indices);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionNormal)*width2*height2, &(vertices[0].Position), GL_STATIC_DRAW);
 
 	delete[] vertices;
 }
@@ -64,7 +65,7 @@ void LoadShaders()
 	program = CreateProgram(shaders);
 }
 
-glm::vec4 g_lightDirection(-1.f, 0.f, -1.0f, 0.0f);
+glm::vec4 g_lightDirection(-100.f, 0.f, -100.0f, 0.0f);
 
 GLuint dirToLightUnif;
 GLuint modelToCameraMatrixUnif;
@@ -83,7 +84,9 @@ void ReSize2(int width, int height)
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 
-	glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
+	//glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
+
+	glm::mat4 projectionMatrix = glm::ortho(-128.f, 128.f, -10.f, 10.f, 1.f, 500.f);
 
 	ProjectionBlock projData;
 	projData.cameraToClipMatrix = projectionMatrix;
@@ -110,10 +113,10 @@ void Render2()
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 100.f), glm::vec3(0.f, 1.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
+	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
 	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, clockObject.GetElapsedTime()*10, glm::vec3(0.f, 0.f, 1.f));
 
-	glm::vec4 lightDirCameraSpace = modelViewMatrix * g_lightDirection;
+	glm::vec4 lightDirCameraSpace = glm::normalize(modelViewMatrix * g_lightDirection);
     
 	glUseProgram(program);
     
@@ -129,7 +132,7 @@ void Render2()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), 0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), (void*)sizeof(glm::vec3));
     
-	glDrawElements(GL_TRIANGLES, (127*127*6), GL_UNSIGNED_INT, indices);
+	glDrawElements(GL_TRIANGLES, ((width2-1)*(height2-1)*6), GL_UNSIGNED_INT, indices);
     
     glDisableVertexAttribArray(0);
     glDisableVertexAttribArray(1);
@@ -152,8 +155,6 @@ void Render()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), 0);
 
-	//glDrawArrays(GL_LINES, 0, (128*127*2)*2);
-	//glDrawArrays(GL_TRIANGLES, 0, 127*127*4);
 	glDrawElements(GL_TRIANGLES, (127*127*6), GL_UNSIGNED_INT, indices);
 
 	glDisableVertexAttribArray(0);
@@ -176,13 +177,12 @@ void Init()
 	LoadShaders();
 	GetUniformLocations();
 
-		glGenBuffers(1, &g_projectionUniformBuffer);
+	glGenBuffers(1, &g_projectionUniformBuffer);
 	glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
 	glBufferData(GL_UNIFORM_BUFFER, sizeof(ProjectionBlock), NULL, GL_DYNAMIC_DRAW);
 
 	//Bind the static buffers.
-	glBindBufferRange(GL_UNIFORM_BUFFER, 2, g_projectionUniformBuffer,
-		0, sizeof(ProjectionBlock));
+	glBindBufferRange(GL_UNIFORM_BUFFER, 2, g_projectionUniformBuffer, 0, sizeof(ProjectionBlock));
 
 	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 

@@ -83,13 +83,19 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NoiseTerrain.cpp" />
     <ClCompile Include="noise\perlin.cpp" />
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderCompiler.cpp" />
+    <ClCompile Include="TerrainRenderer\TerrainRenderer.cpp" />
     <ClCompile Include="VerticeFromDataGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NoiseTerrain.h" />
     <ClInclude Include="noise\perlin.h" />
+    <ClInclude Include="Program.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderCompiler.h" />
+    <ClInclude Include="TerrainRenderer\TerrainRenderer.h" />
     <ClInclude Include="VerticesFromDataGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

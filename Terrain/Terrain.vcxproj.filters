@@ -17,6 +17,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{fa7e9af0-111a-4940-a5eb-f17d06da3175}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TerrainRenderer">
+      <UniqueIdentifier>{dfbec3a0-4238-42f9-aff0-0fc7088c879c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -37,6 +40,15 @@
     <ClCompile Include="ShaderCompiler.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
+    <ClCompile Include="TerrainRenderer\TerrainRenderer.cpp">
+      <Filter>TerrainRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="noise\perlin.h">
@@ -49,6 +61,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ShaderCompiler.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="TerrainRenderer\TerrainRenderer.h">
+      <Filter>TerrainRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Program.h">
       <Filter>Shader</Filter>
     </ClInclude>
   </ItemGroup>
