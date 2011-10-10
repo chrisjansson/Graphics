@@ -16,6 +16,7 @@ public:
 	void Delete();
 	void Link();
 	void Use();
+	GLuint GetProgram() { return _program; }
 private:
 	GLuint _program;
 	std::vector<Shader> _shaders;

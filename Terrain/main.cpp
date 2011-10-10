@@ -6,6 +6,7 @@
 #include "ShaderCompiler.h"
 
 #include "Shader.h"
+#include "Program.h"
 
 #include <glm\glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -35,8 +36,6 @@ void InitializeBufferObject()
 	glGenBuffers(1, &bufferObject);
 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject);
 
-
-
 	NoiseTerrain2D terrain(width2, height2, 10, 6.f, 10.f, 4711);
 	terrain.GenerateData();
 
@@ -48,21 +47,24 @@ void InitializeBufferObject()
 }
 
 sf::Clock clockObject;
-
-GLuint program;
+	
+Program* program;
 void LoadShaders()
 {
-	std::string vertexShaderString = LoadShaderStringFromFile("data/DirVertexLighting_PN.vert");
-	std::string fragmentShaderString = LoadShaderStringFromFile("data/ColorPassthrough.frag");
+	Shader vs(GL_VERTEX_SHADER);
+	vs.Load("data/DirVertexLighting_PN.vert");
+	vs.Compile();
 
-	GLuint vertexShader = CreateShader(GL_VERTEX_SHADER, vertexShaderString.c_str());
-	GLuint fragmentShader = CreateShader(GL_FRAGMENT_SHADER, fragmentShaderString.c_str());
+	Shader fs(GL_FRAGMENT_SHADER);
+	fs.Load("data/ColorPassthrough.frag");
+	fs.Compile();
 
-	std::vector<GLuint> shaders;
-	shaders.push_back(vertexShader);
-	shaders.push_back(fragmentShader);
+	program = new Program();
 
-	program = CreateProgram(shaders);
+	program->AttachShader(vs);
+	program->AttachShader(fs);
+
+	program->Link();
 }
 
 glm::vec4 g_lightDirection(-100.f, 0.f, -100.0f, 0.0f);
@@ -84,9 +86,9 @@ void ReSize2(int width, int height)
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
 
-	//glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
+	glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
 
-	glm::mat4 projectionMatrix = glm::ortho(-128.f, 128.f, -10.f, 10.f, 1.f, 500.f);
+	//glm::mat4 projectionMatrix = glm::ortho(-128.f, 128.f, -10.f, 10.f, 1.f, 500.f);
 
 	ProjectionBlock projData;
 	projData.cameraToClipMatrix = projectionMatrix;
@@ -98,13 +100,13 @@ void ReSize2(int width, int height)
 
 void GetUniformLocations()
 {
-	modelToCameraMatrixUnif = glGetUniformLocation(program, "modelToCameraMatrix");
-	normalModelToCameraMatrixUnif = glGetUniformLocation(program, "normalModelToCameraMatrix");
-	dirToLightUnif = glGetUniformLocation(program, "dirToLight");
-	lightIntensityUnif = glGetUniformLocation(program, "lightIntensity");
+	modelToCameraMatrixUnif = glGetUniformLocation(program->GetProgram(), "modelToCameraMatrix");
+	normalModelToCameraMatrixUnif = glGetUniformLocation(program->GetProgram(), "normalModelToCameraMatrix");
+	dirToLightUnif = glGetUniformLocation(program->GetProgram(), "dirToLight");
+	lightIntensityUnif = glGetUniformLocation(program->GetProgram(), "lightIntensity");
 
-	GLuint projectionBlock = glGetUniformBlockIndex(program, "Projection");
-	glUniformBlockBinding(program, projectionBlock, 2);
+	GLuint projectionBlock = glGetUniformBlockIndex(program->GetProgram(), "Projection");
+	glUniformBlockBinding(program->GetProgram(), projectionBlock, 2);
 }
 
 void Render2() 
@@ -118,8 +120,8 @@ void Render2()
 
 	glm::vec4 lightDirCameraSpace = glm::normalize(modelViewMatrix * g_lightDirection);
     
-	glUseProgram(program);
-    
+	program->Use();
+
 	glUniform3fv(dirToLightUnif, 1, glm::value_ptr(lightDirCameraSpace));
 	glUniformMatrix4fv(modelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(rotationMatrix));
 	glm::mat3 normMatrix(rotationMatrix);
