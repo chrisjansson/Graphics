@@ -115,7 +115,7 @@ void Render2()
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 0.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
+	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 50.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
 	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, clockObject.GetElapsedTime()*10, glm::vec3(0.f, 0.f, 1.f));
 
 	glm::vec4 lightDirCameraSpace = glm::normalize(modelViewMatrix * g_lightDirection);
@@ -219,6 +219,8 @@ int main(int argc, char** argv)
 	sf::Window app(sf::VideoMode(800, 600, 32), "SFML OpenGL", sf::Style::Resize, settings);
 	
 	Init();
+
+	
 
 	fprintf(stderr, "Hello stderr world!");
 

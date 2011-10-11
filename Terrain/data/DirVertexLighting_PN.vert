@@ -16,6 +16,8 @@ layout(std140) uniform Projection
 	mat4 cameraToClipMatrix;
 };
 
+vec3 diffuseColor;
+
 void main()
 {
 	gl_Position = cameraToClipMatrix * (modelToCameraMatrix * vec4(position, 1.0));
@@ -25,5 +27,9 @@ void main()
 	float cosAngIncidence = dot(normCamSpace, dirToLight);
 	cosAngIncidence = clamp(cosAngIncidence, 0, 1);
 	
-	interpColor = lightIntensity * cosAngIncidence;
+	diffuseColor.x = (position.x + 64) / 128;
+	diffuseColor.y = (position.y + 64) / 128;
+	diffuseColor.z = (position.z + 10) / 20;
+	
+	interpColor = vec4(diffuseColor, 1.0) * lightIntensity * cosAngIncidence;
 }
