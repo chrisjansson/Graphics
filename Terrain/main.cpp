@@ -3,7 +3,6 @@
 #include <SFML/window.hpp>
 #include "NoiseTerrain.h"
 #include "VerticesFromDataGenerator.h"
-#include "ShaderCompiler.h"
 
 #include "Shader.h"
 #include "Program.h"
@@ -12,7 +11,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-
+#include "Renderer\BaseRenderer.h"
 
 void ReSize(int width, int height) 
 {
@@ -220,7 +219,8 @@ int main(int argc, char** argv)
 	
 	Init();
 
-	
+	BaseRenderer b;
+	b.ReSize(100, 100);
 
 	fprintf(stderr, "Hello stderr world!");
 

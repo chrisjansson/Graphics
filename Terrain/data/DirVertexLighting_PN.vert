@@ -29,7 +29,7 @@ void main()
 	
 	diffuseColor.x = (position.x + 64) / 128;
 	diffuseColor.y = (position.y + 64) / 128;
-	diffuseColor.z = (position.z + 10) / 20;
+	diffuseColor.z = 1.0; //(position.z + 10) / 20;
 	
 	interpColor = vec4(diffuseColor, 1.0) * lightIntensity * cosAngIncidence;
 }

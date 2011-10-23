@@ -17,8 +17,11 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{fa7e9af0-111a-4940-a5eb-f17d06da3175}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TerrainRenderer">
-      <UniqueIdentifier>{dfbec3a0-4238-42f9-aff0-0fc7088c879c}</UniqueIdentifier>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{2eb8b1eb-2786-4c8e-b65d-d15b307fa380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\TerrainRenderer">
+      <UniqueIdentifier>{4a565efb-b764-45ef-a349-5c1e41f1811e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,14 +43,17 @@
     <ClCompile Include="ShaderCompiler.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
-    <ClCompile Include="TerrainRenderer\TerrainRenderer.cpp">
-      <Filter>TerrainRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\BaseRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\TerrainRenderer\TerrainRenderer.cpp">
+      <Filter>Renderer\TerrainRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,14 +69,17 @@
     <ClInclude Include="ShaderCompiler.h">
       <Filter>Shader</Filter>
     </ClInclude>
-    <ClInclude Include="TerrainRenderer\TerrainRenderer.h">
-      <Filter>TerrainRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Shader</Filter>
     </ClInclude>
     <ClInclude Include="Program.h">
       <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BaseRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\TerrainRenderer\TerrainRenderer.h">
+      <Filter>Renderer\TerrainRenderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
