@@ -68,33 +68,29 @@ void LoadShaders()
 
 glm::vec4 g_lightDirection(-100.f, 0.f, -100.0f, 0.0f);
 
-GLuint dirToLightUnif;
-GLuint modelToCameraMatrixUnif;
-GLuint normalModelToCameraMatrixUnif;
-GLuint lightIntensityUnif;
-
-GLuint g_projectionUniformBuffer = 0;
-
-struct ProjectionBlock
-{
-	glm::mat4 cameraToClipMatrix;
-};
+GLint dirToLightUnif;
+GLint modelToCameraMatrixUnif;
+GLint normalModelToCameraMatrixUnif;
+GLint lightIntensityUnif;
+GLint cameraToClipMatrixUnif;
 
 void ReSize2(int width, int height) 
 {
 	glViewport(0, 0, width, height);
-	glMatrixMode(GL_PROJECTION);
 
 	glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
 
 	//glm::mat4 projectionMatrix = glm::ortho(-128.f, 128.f, -10.f, 10.f, 1.f, 500.f);
 
-	ProjectionBlock projData;
-	projData.cameraToClipMatrix = projectionMatrix;
+	glUniformMatrix4fv(cameraToClipMatrixUnif, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 
-	glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
-	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(ProjectionBlock), &projData);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	//ProjectionBlock projData;
+	//projData.cameraToClipMatrix = projectionMatrix;
+
+	//glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
+	//glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(ProjectionBlock), &projData);
+	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
 }
 
 void GetUniformLocations()
@@ -103,9 +99,7 @@ void GetUniformLocations()
 	normalModelToCameraMatrixUnif = glGetUniformLocation(program->GetProgram(), "normalModelToCameraMatrix");
 	dirToLightUnif = glGetUniformLocation(program->GetProgram(), "dirToLight");
 	lightIntensityUnif = glGetUniformLocation(program->GetProgram(), "lightIntensity");
-
-	GLuint projectionBlock = glGetUniformBlockIndex(program->GetProgram(), "Projection");
-	glUniformBlockBinding(program->GetProgram(), projectionBlock, 2);
+	cameraToClipMatrixUnif = glGetUniformLocation(program->GetProgram(), "cameraToClipMatrix");
 }
 
 void Render2() 
@@ -178,14 +172,14 @@ void Init()
 	LoadShaders();
 	GetUniformLocations();
 
-	glGenBuffers(1, &g_projectionUniformBuffer);
-	glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
-	glBufferData(GL_UNIFORM_BUFFER, sizeof(ProjectionBlock), NULL, GL_DYNAMIC_DRAW);
+	//glGenBuffers(1, &g_projectionUniformBuffer);
+	//glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
+	//glBufferData(GL_UNIFORM_BUFFER, sizeof(ProjectionBlock), NULL, GL_DYNAMIC_DRAW);
 
-	//Bind the static buffers.
-	glBindBufferRange(GL_UNIFORM_BUFFER, 2, g_projectionUniformBuffer, 0, sizeof(ProjectionBlock));
+	////Bind the static buffers.
+	//glBindBufferRange(GL_UNIFORM_BUFFER, 2, g_projectionUniformBuffer, 0, sizeof(ProjectionBlock));
 
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	ReSize2(800, 600);
 }
@@ -218,9 +212,6 @@ int main(int argc, char** argv)
 	sf::Window app(sf::VideoMode(800, 600, 32), "SFML OpenGL", sf::Style::Resize, settings);
 	
 	Init();
-
-	BaseRenderer b;
-	b.ReSize(100, 100);
 
 	fprintf(stderr, "Hello stderr world!");
 
