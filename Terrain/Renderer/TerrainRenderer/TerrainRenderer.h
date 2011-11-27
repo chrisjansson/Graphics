@@ -7,6 +7,8 @@
 
 struct TerrainRendererResources 
 {
+	TerrainRendererResources() {}
+
 	Program Program;
 	Shader VertexShader;
 	Shader FragmentShader;
@@ -25,9 +27,10 @@ struct TerrainRendererResources
 	GLuint *indices;
 };
 
-class TerrainRenderer : BaseRenderer
+class TerrainRenderer : public BaseRenderer
 {
 public:
+	TerrainRenderer(ProjectionSettings projectionSettings);
 	void Render();
 	void Initialize();
 	void Finalize();

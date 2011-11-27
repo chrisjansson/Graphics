@@ -2,6 +2,10 @@
 #include "../../NoiseTerrain.h"
 #include "../../VerticesFromDataGenerator.h"
 
+TerrainRenderer::TerrainRenderer(ProjectionSettings projectionSettings) : BaseRenderer(projectionSettings)
+{
+}
+
 void TerrainRenderer::ProjectionMatrixChanged() 
 {
 	resources.Program.Use();
@@ -16,12 +20,16 @@ void TerrainRenderer::Render()
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	 
+	static float angle = 0;
 
 	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 50.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
-	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, 0.f, glm::vec3(0.f, 0.f, 1.f));
+	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, angle, glm::vec3(0.f, 0.f, 1.f));
 
 	glm::vec4 lightDirCameraSpace = glm::normalize(modelViewMatrix * g_lightDirection);
-    
+
+	angle += 0.001;
+
 	resources.Program.Use();
 
 	glUniform3fv(resources.Uniforms.DirToLightUnif, 1, glm::value_ptr(lightDirCameraSpace));
@@ -45,6 +53,14 @@ void TerrainRenderer::Render()
 
 void TerrainRenderer::Initialize()
 {
+	// Set color and depth clear value
+    glClearDepth(1.f);
+    glClearColor(0.f, 0.f, 0.f, 0.f);
+
+    // Enable Z-buffer read and write
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
+
 	//Set up for rendering, allocate shaders and data
 
 	terrainWidth = 128;

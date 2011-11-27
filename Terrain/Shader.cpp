@@ -18,6 +18,8 @@ std::string const * LoadFile(std::string const &fileName)
 	return strShaderFile;
 }
 
+Shader::Shader() { }
+
 Shader::Shader(GLenum shaderType) 
 {
 	this->_shaderType = shaderType;

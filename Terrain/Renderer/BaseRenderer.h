@@ -17,7 +17,7 @@ struct ProjectionSettings
 {
 	ProjectionSettings() 
 	{
-		ProjectionType = ProjectionTypeEnum::Perspective; 
+		ProjectionType = Perspective; 
 		FieldOfView = 50.f;
 		NearPlane = 1.f;
 		FarPlane = 500.f;
@@ -42,6 +42,7 @@ struct ProjectionSettings
 class BaseRenderer
 {
 public:
+	BaseRenderer(ProjectionSettings projectionSettings);
 	void ReSize(int width, int height);
 
 	virtual void Render() = 0;
