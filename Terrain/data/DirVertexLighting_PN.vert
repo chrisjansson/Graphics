@@ -5,16 +5,13 @@ layout(location = 1) in vec3 normal;
 
 smooth out vec4 interpColor;
 
+uniform mat4 cameraToClipMatrix;
+
 uniform vec3 dirToLight;
 uniform vec4 lightIntensity;
 
 uniform mat4 modelToCameraMatrix;
 uniform mat3 normalModelToCameraMatrix;
-
-layout(std140) uniform Projection
-{
-	mat4 cameraToClipMatrix;
-};
 
 vec3 diffuseColor;
 

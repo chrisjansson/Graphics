@@ -47,12 +47,11 @@ public:
 	virtual void Render() = 0;
 	virtual void Initialize() = 0;
 	virtual void Finalize() = 0;
+protected:
+	glm::mat4 _projectionMatrix;
 private:
 	ProjectionSettings _settings;
-	glm::mat4 _projectionMatrix;
-
 	virtual void ProjectionMatrixChanged() = 0;
-	
 };
 
 #endif

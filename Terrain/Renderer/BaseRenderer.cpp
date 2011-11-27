@@ -22,4 +22,7 @@ void BaseRenderer::ReSize(int width, int height)
 			_settings.NearPlane,
 			_settings.FarPlane);
 	}
+
+	ProjectionMatrixChanged();
 }
+

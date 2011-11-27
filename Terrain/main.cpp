@@ -13,15 +13,6 @@
 
 #include "Renderer\BaseRenderer.h"
 
-void ReSize(int width, int height) 
-{
-	glViewport(0, 0, width, height);
-	glMatrixMode(GL_PROJECTION);
-
-	glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
-	glLoadMatrixf(glm::value_ptr(projectionMatrix));
-}
-
 GLuint bufferObject;
 GLuint* indices;
 
@@ -68,29 +59,23 @@ void LoadShaders()
 
 glm::vec4 g_lightDirection(-100.f, 0.f, -100.0f, 0.0f);
 
-GLint dirToLightUnif;
-GLint modelToCameraMatrixUnif;
-GLint normalModelToCameraMatrixUnif;
-GLint lightIntensityUnif;
-GLint cameraToClipMatrixUnif;
+GLuint dirToLightUnif;
+GLuint modelToCameraMatrixUnif;
+GLuint normalModelToCameraMatrixUnif;
+GLuint lightIntensityUnif;
+GLuint cameraToClipMatrixUnif;
+
 
 void ReSize2(int width, int height) 
 {
 	glViewport(0, 0, width, height);
-
 	glm::mat4 projectionMatrix = glm::perspective(50.0f, (float)width/(float)height, 1.f, 500.f);
 
-	//glm::mat4 projectionMatrix = glm::ortho(-128.f, 128.f, -10.f, 10.f, 1.f, 500.f);
+	program->Use();
 
 	glUniformMatrix4fv(cameraToClipMatrixUnif, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
 
-
-	//ProjectionBlock projData;
-	//projData.cameraToClipMatrix = projectionMatrix;
-
-	//glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
-	//glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(ProjectionBlock), &projData);
-	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	glUseProgram(0);
 }
 
 void GetUniformLocations()
@@ -172,14 +157,7 @@ void Init()
 	LoadShaders();
 	GetUniformLocations();
 
-	//glGenBuffers(1, &g_projectionUniformBuffer);
-	//glBindBuffer(GL_UNIFORM_BUFFER, g_projectionUniformBuffer);
-	//glBufferData(GL_UNIFORM_BUFFER, sizeof(ProjectionBlock), NULL, GL_DYNAMIC_DRAW);
-
-	////Bind the static buffers.
-	//glBindBufferRange(GL_UNIFORM_BUFFER, 2, g_projectionUniformBuffer, 0, sizeof(ProjectionBlock));
-
-	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	ReSize2(800, 600);
 }
