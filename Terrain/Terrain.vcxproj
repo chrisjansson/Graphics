@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\GLEW\src\glew.c" />
+    <ClCompile Include="UniformUploaders.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NoiseTerrain.cpp" />
     <ClCompile Include="noise\perlin.cpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="VerticeFromDataGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UniformUploaders.h" />
     <ClInclude Include="NoiseTerrain.h" />
     <ClInclude Include="noise\perlin.h" />
     <ClInclude Include="Program.h" />
@@ -98,7 +100,14 @@
     <ClInclude Include="Renderer\TerrainRenderer\TerrainRenderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderCompiler.h" />
+    <ClInclude Include="Uniform.h" />
     <ClInclude Include="VerticesFromDataGenerator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\ColorPassthrough.frag" />
+    <None Include="data\DirVertexLighting_PN.vert" />
+    <None Include="data\VertexColors.frag" />
+    <None Include="data\VertexColors.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

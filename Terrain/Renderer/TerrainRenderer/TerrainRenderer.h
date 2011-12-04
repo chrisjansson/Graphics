@@ -4,6 +4,7 @@
 #include "../BaseRenderer.h"
 #include "../../Program.h"
 #include "../../Shader.h"
+#include "../../Uniform.h"
 
 struct TerrainRendererResources 
 {
@@ -16,11 +17,11 @@ struct TerrainRendererResources
 	struct 
 	{
 		/* UniformLocations goes here */
-		GLint ModelToCameraMatrix;
-		GLint NormalModelToCameraMatrixUnif;
-		GLint DirToLightUnif;
-		GLint LightIntensityUnif;
-		GLint CameraToClipMatrix;
+		Uniform<glm::mat4> ModelToCameraMatrixUniform;
+		Uniform<glm::vec3> DirToLightUniform;
+		Uniform<glm::vec4> LightIntensityUniform;
+		Uniform<glm::mat3> NormalModelToCameraMatrixUniform;
+		Uniform<glm::mat4> CameraToClipMatrixUniform;
 	} Uniforms;
 
 	GLuint vertexBuffer;

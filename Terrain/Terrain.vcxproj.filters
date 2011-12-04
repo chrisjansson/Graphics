@@ -23,6 +23,9 @@
     <Filter Include="Renderer\TerrainRenderer">
       <UniqueIdentifier>{4a565efb-b764-45ef-a349-5c1e41f1811e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader\Uniforms">
+      <UniqueIdentifier>{c237dee7-4c36-4560-894a-88ea44c40fcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -55,6 +58,9 @@
     <ClCompile Include="Renderer\TerrainRenderer\TerrainRenderer.cpp">
       <Filter>Renderer\TerrainRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="UniformUploaders.cpp">
+      <Filter>Shader\Uniforms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="noise\perlin.h">
@@ -81,5 +87,17 @@
     <ClInclude Include="Renderer\TerrainRenderer\TerrainRenderer.h">
       <Filter>Renderer\TerrainRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="Uniform.h">
+      <Filter>Shader\Uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="UniformUploaders.h">
+      <Filter>Shader\Uniforms</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\ColorPassthrough.frag" />
+    <None Include="data\DirVertexLighting_PN.vert" />
+    <None Include="data\VertexColors.frag" />
+    <None Include="data\VertexColors.vert" />
   </ItemGroup>
 </Project>

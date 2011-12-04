@@ -10,33 +10,35 @@ void TerrainRenderer::ProjectionMatrixChanged()
 {
 	resources.Program.Use();
 
-	glUniformMatrix4fv(resources.Uniforms.CameraToClipMatrix, 1, GL_FALSE, glm::value_ptr(this->_projectionMatrix));
+	resources.Uniforms.CameraToClipMatrixUniform.Upload(_projectionMatrix);
 
 	glUseProgram(0);
 }
 
 void TerrainRenderer::Render() 
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.8f, 0.8f, 0.8f, 0.8f);
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	 
 	static float angle = 0;
 
-	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, 100.f, 50.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
+	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, -100.f, 50.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
 	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, angle, glm::vec3(0.f, 0.f, 1.f));
 
+	g_lightDirection = g_lightDirection + glm::vec4(0.001f, 0.f, 0.f, 0.f);
 	glm::vec4 lightDirCameraSpace = glm::normalize(modelViewMatrix * g_lightDirection);
-
-	angle += 0.001;
+	resources.Uniforms.DirToLightUniform.SetUniform(glm::vec3(lightDirCameraSpace));
 
 	resources.Program.Use();
 
-	glUniform3fv(resources.Uniforms.DirToLightUnif, 1, glm::value_ptr(lightDirCameraSpace));
-	glUniformMatrix4fv(resources.Uniforms.ModelToCameraMatrix, 1, GL_FALSE, glm::value_ptr(rotationMatrix));
+	resources.Uniforms.ModelToCameraMatrixUniform.Upload(rotationMatrix);
+
+	resources.Uniforms.DirToLightUniform.Upload();
 	glm::mat3 normMatrix(rotationMatrix);
-	glUniformMatrix3fv(resources.Uniforms.NormalModelToCameraMatrixUnif, 1, GL_FALSE, glm::value_ptr(normMatrix));
-	glUniform4f(resources.Uniforms.LightIntensityUnif, 1.0f, 1.0f, 1.0f, 1.0f);
+
+	resources.Uniforms.NormalModelToCameraMatrixUniform.Upload(normMatrix);
+	resources.Uniforms.LightIntensityUniform.Upload(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 	glBindBuffer(GL_ARRAY_BUFFER, resources.vertexBuffer);
     glEnableVertexAttribArray(0);
@@ -60,8 +62,6 @@ void TerrainRenderer::Initialize()
     // Enable Z-buffer read and write
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
-
-	//Set up for rendering, allocate shaders and data
 
 	terrainWidth = 128;
 	terrainHeight = 128;
@@ -100,11 +100,11 @@ void TerrainRenderer::Initialize()
 
 void TerrainRenderer::LoadUniforms()
 {
-	resources.Uniforms.ModelToCameraMatrix = LoadUniform("modelToCameraMatrix");
-	resources.Uniforms.NormalModelToCameraMatrixUnif = LoadUniform("normalModelToCameraMatrix"); 
-	resources.Uniforms.DirToLightUnif = LoadUniform("dirToLight"); 
-	resources.Uniforms.LightIntensityUnif = LoadUniform("lightIntensity"); 
-	resources.Uniforms.CameraToClipMatrix = LoadUniform("cameraToClipMatrix");
+	resources.Uniforms.ModelToCameraMatrixUniform = Uniform<glm::mat4>(LoadUniform("modelToCameraMatrix"));
+	resources.Uniforms.DirToLightUniform = Uniform<glm::vec3>(LoadUniform("dirToLight"));
+	resources.Uniforms.NormalModelToCameraMatrixUniform = Uniform<glm::mat3>(LoadUniform("normalModelToCameraMatrix"));
+	resources.Uniforms.LightIntensityUniform = Uniform<glm::vec4>(LoadUniform("lightIntensity"));
+	resources.Uniforms.CameraToClipMatrixUniform = Uniform<glm::mat4>(LoadUniform("cameraToClipMatrix"));
 }
 
 void TerrainRenderer::Finalize() 

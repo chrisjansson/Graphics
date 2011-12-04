@@ -61,9 +61,9 @@ int main(int argc, char** argv)
 
 		terrainRenderer.Render();
 
-		PrintFPS();
-
 		app.Display();
+
+		PrintFPS();
 	}
 
 	return 0;
