@@ -18,7 +18,7 @@ struct TerrainRendererResources
 	{
 		/* UniformLocations goes here */
 		Uniform<glm::mat4> ModelToCameraMatrixUniform;
-		Uniform<glm::vec3> DirToLightUniform;
+		Uniform<glm::vec4> DirToLightUniform;
 		Uniform<glm::vec4> LightIntensityUniform;
 		Uniform<glm::mat3> NormalModelToCameraMatrixUniform;
 		Uniform<glm::mat4> CameraToClipMatrixUniform;
@@ -32,7 +32,7 @@ class TerrainRenderer : public BaseRenderer
 {
 public:
 	TerrainRenderer(ProjectionSettings projectionSettings);
-	void Render();
+	void Render(float elapsedTime);
 	void Initialize();
 	void Finalize();
 private:

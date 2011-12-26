@@ -45,7 +45,7 @@ public:
 	BaseRenderer(ProjectionSettings projectionSettings);
 	void ReSize(int width, int height);
 
-	virtual void Render() = 0;
+	virtual void Render(float elapsedTime) = 0;
 	virtual void Initialize() = 0;
 	virtual void Finalize() = 0;
 protected:

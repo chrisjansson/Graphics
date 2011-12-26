@@ -99,5 +99,7 @@
     <None Include="data\DirVertexLighting_PN.vert" />
     <None Include="data\VertexColors.frag" />
     <None Include="data\VertexColors.vert" />
+    <None Include="data\PerFragmentLighting.frag" />
+    <None Include="data\PerFragmentLighting.vert" />
   </ItemGroup>
 </Project>

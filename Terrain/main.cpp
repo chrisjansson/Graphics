@@ -8,6 +8,7 @@
 sf::Clock clockObject;
 
 float oldTime=0;
+float startTime;
 int frames=0;
 void PrintFPS()
 {
@@ -41,6 +42,8 @@ int main(int argc, char** argv)
 	terrainRenderer.Initialize();
 	terrainRenderer.ReSize(800, 600);
 
+	sf::Clock clock = sf::Clock();
+
 	while(app.IsOpened()) 
 	{
 		sf::Event event;
@@ -59,7 +62,7 @@ int main(int argc, char** argv)
 		}
 		app.SetActive();
 
-		terrainRenderer.Render();
+		terrainRenderer.Render(clock.GetElapsedTime());
 
 		app.Display();
 

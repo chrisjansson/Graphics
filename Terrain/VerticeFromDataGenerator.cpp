@@ -162,7 +162,7 @@ void VerticesAndIndicesFromData(const float* data, int width, int height, Vertex
 		glm::vec3 b = (*vertices)[(*indices)[i + 1]].Position;
 		glm::vec3 c = (*vertices)[(*indices)[i + 2]].Position;
 
-		glm::vec3 normal = glm::normalize(glm::cross(c - a, b - a));
+		glm::vec3 normal = glm::normalize(glm::cross(b - a, c - a));
 
 		(*vertices)[(*indices)[i + 0]].Normal += normal;
 		(*vertices)[(*indices)[i + 1]].Normal += normal;
