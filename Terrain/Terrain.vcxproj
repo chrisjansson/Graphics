@@ -89,6 +89,7 @@
     <ClCompile Include="Renderer\TerrainRenderer\TerrainRenderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderCompiler.cpp" />
+    <ClCompile Include="VertexAttribute.cpp" />
     <ClCompile Include="VerticeFromDataGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderCompiler.h" />
     <ClInclude Include="Uniform.h" />
+    <ClInclude Include="VertexAttribute.h" />
     <ClInclude Include="VerticesFromDataGenerator.h" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "../../NoiseTerrain.h"
 #include "../../VerticesFromDataGenerator.h"
 #include <cmath>
+#include "../../VertexAttribute.h"
 
 TerrainRenderer::TerrainRenderer(ProjectionSettings projectionSettings) : BaseRenderer(projectionSettings)
 {
@@ -41,18 +42,10 @@ void TerrainRenderer::Render(float elapsedTime)
 
 	resources.Uniforms.LightIntensityUniform.Upload(glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
 
-	
-
-	glBindBuffer(GL_ARRAY_BUFFER, resources.vertexBuffer);
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), 0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexPositionNormal), (void*)sizeof(glm::vec3));
-    
+	glBindVertexArray(vertexArrayObject);
 	glDrawElements(GL_TRIANGLES, ((terrainWidth-1)*(terrainHeight-1)*6), GL_UNSIGNED_INT, resources.indices);
+	glBindVertexArray(0);
 
-    glDisableVertexAttribArray(0);
-    glDisableVertexAttribArray(1);
     glUseProgram(0);
 }
 
@@ -90,19 +83,20 @@ void TerrainRenderer::Initialize()
 
 	LoadUniforms();
 
-	glGenBuffers(1, &resources.vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, resources.vertexBuffer);
+	InitializeVertexBuffer();
+}
 
+void TerrainRenderer::InitializeVertexBuffer()
+{
 	NoiseTerrain2D terrain(terrainWidth, terrainHeight, 10, 6.f, 10.f, 4711);
 	terrain.GenerateData();
 
 	VertexPositionNormal* vertices;
 	VerticesAndIndicesFromData(terrain.GetData(), terrainWidth, terrainHeight, &vertices, &resources.indices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionNormal)*terrainWidth*terrainHeight, &(vertices[0].Position), GL_STATIC_DRAW);
+
+	CreateVertexArrayObject(vertices, &vertexArrayObject, &resources.vertexBuffer, terrainWidth*terrainHeight);
 
 	delete[] vertices;
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void TerrainRenderer::LoadUniforms()

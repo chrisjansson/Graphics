@@ -1,3 +1,6 @@
+#ifndef VERTICES_FROM_DATA_GENERATOR_H
+#define VERTICES_FROM_DATA_GENERATOR_H
+
 #include <GL\glew.h>
 #include <glm\glm.hpp>
 #include <vector>
@@ -13,3 +16,5 @@ const float* LinesFromData(const float* data, int width, int height);
 const float* TrianglesFromData(const float* data, int width, int height);
 const glm::vec3* TrianglesFromDataGLM(const float* data, int width, int height);
 void VerticesAndIndicesFromData(const float* data, int width, int height, VertexPositionNormal** vertices, GLuint** indices);
+
+#endif

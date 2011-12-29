@@ -40,10 +40,12 @@ private:
 	GLint LoadUniform(char const *uniformName);
 	void ProjectionMatrixChanged();
 	void LoadUniforms();
+	void InitializeVertexBuffer();
 
 	glm::vec4 g_lightDirection;
 	int terrainWidth; 
 	int terrainHeight;
+	GLuint vertexArrayObject;
 };
 
 #endif

@@ -61,6 +61,9 @@
     <ClCompile Include="UniformUploaders.cpp">
       <Filter>Shader\Uniforms</Filter>
     </ClCompile>
+    <ClCompile Include="VertexAttribute.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="noise\perlin.h">
@@ -92,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="UniformUploaders.h">
       <Filter>Shader\Uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexAttribute.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
