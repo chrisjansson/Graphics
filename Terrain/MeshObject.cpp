@@ -54,19 +54,19 @@ void SetFrontData()
 	vertices[0].Position = p0;
 	vertices[0].Normal = n5;
 
-	vertices[1].Position = p1;
+	vertices[1].Position = p2;
 	vertices[1].Normal = n5;
 
-	vertices[2].Position = p2;
+	vertices[2].Position = p1;
 	vertices[2].Normal = n5;
 
 	vertices[3].Position = p0;
 	vertices[3].Normal = n5;
 
-	vertices[4].Position = p2;
+	vertices[4].Position = p3;
 	vertices[4].Normal = n5;
 
-	vertices[5].Position = p3;
+	vertices[5].Position = p2;
 	vertices[5].Normal = n5;
 }
 
@@ -96,25 +96,25 @@ void SetTopData()
 	vertices[12].Position = p3;
 	vertices[12].Normal = n2;
 
-	vertices[13].Position = p2;
+	vertices[13].Position = p6;
 	vertices[13].Normal = n2;
 
-	vertices[14].Position = p6;
+	vertices[14].Position = p2;
 	vertices[14].Normal = n2;
 
 	vertices[15].Position = p3;
 	vertices[15].Normal = n2;
 
-	vertices[16].Position = p6;
+	vertices[16].Position = p7;
 	vertices[16].Normal = n2;
 
-	vertices[17].Position = p7;
+	vertices[17].Position = p6;
 	vertices[17].Normal = n2;
 }
 
 void SetBottomData()
 {
-	vertices[18].Position = p0;
+	vertices[18].Position = p4;
 	vertices[18].Normal = n3;
 
 	vertices[19].Position = p1;
@@ -123,36 +123,56 @@ void SetBottomData()
 	vertices[20].Position = p5;
 	vertices[20].Normal = n3;
 
-	vertices[21].Position = p0;
+	vertices[21].Position = p4;
 	vertices[21].Normal = n3;
 
-	vertices[22].Position = p5;
+	vertices[22].Position = p0;
 	vertices[22].Normal = n3;
 
-	vertices[23].Position = p4;
+	vertices[23].Position = p1;
 	vertices[23].Normal = n3;
 }
 
 void SetLeftData()
 {
 	vertices[24].Position = p4;
-	vertices[25].Position = p0;
-	vertices[26].Position = p3;
+	vertices[24].Normal = n1;
 
-	vertices[27].Position = p0;
-	vertices[28].Position = p3;
-	vertices[29].Position = p7;
+	vertices[25].Position = p3;
+	vertices[25].Normal = n1;
+	
+	vertices[26].Position = p0;
+	vertices[26].Normal = n1;
+
+	vertices[27].Position = p4;
+	vertices[27].Normal = n1;
+
+	vertices[28].Position = p7;
+	vertices[28].Normal = n1;
+
+	vertices[29].Position = p3;
+	vertices[29].Normal = n1;
 }
 
 void SetRightData()
 {
 	vertices[30].Position = p1;
-	vertices[31].Position = p5;
-	vertices[32].Position = p6;
+	vertices[30].Normal = n0;
+
+	vertices[31].Position = p6;
+	vertices[31].Normal = n0;
+
+	vertices[32].Position = p5;
+	vertices[32].Normal = n0;
 
 	vertices[33].Position = p1;
-	vertices[34].Position = p6;
-	vertices[35].Position = p2;
+	vertices[33].Normal = n0;
+
+	vertices[34].Position = p2;
+	vertices[34].Normal = n0;
+
+	vertices[35].Position = p6;
+	vertices[35].Normal = n0;
 }
 
 //front face

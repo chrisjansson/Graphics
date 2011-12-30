@@ -26,11 +26,11 @@ void TerrainRenderer::Render(float elapsedTime)
 	 
 	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, -100.f, 100.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
 	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, 0.f, glm::vec3(0.f, 0.f, 1.f));
-	glm::mat4 cubeMatrix = glm::scale(rotationMatrix, glm::vec3(20.f, 20.f, 20.f));
+	glm::mat4 cubeMatrix = glm::scale(rotationMatrix, glm::vec3(100.f, 100.f, 1.f));
 
-	float x = 32 * cos(elapsedTime / 10);
-	float y = 32 * sin(elapsedTime / 10);
-	glm::vec4 lightPosition = glm::vec4(x, y, 40, 1.f);
+	float x = 32 * cos(elapsedTime);
+	float y = 32 * sin(elapsedTime);
+	glm::vec4 lightPosition = glm::vec4(x, y, 20, 1.f);
 
 	resources.Program.Use();
 
