@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\GLEW\src\glew.c" />
+    <ClCompile Include="MeshObject.cpp" />
     <ClCompile Include="UniformUploaders.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NoiseTerrain.cpp" />
@@ -93,6 +94,7 @@
     <ClCompile Include="VerticeFromDataGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MeshObject.h" />
     <ClInclude Include="UniformUploaders.h" />
     <ClInclude Include="NoiseTerrain.h" />
     <ClInclude Include="noise\perlin.h" />

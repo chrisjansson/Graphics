@@ -17,7 +17,7 @@ void main()
 	gl_Position = cameraToClipMatrix * cameraSpacePosition;
 
 	vertexNormal = normal;
-//
+	//
 	//diffuseColor.x = (position.x + 64) / 128;
 	//diffuseColor.y = (position.y + 64) / 128;
 	//diffuseColor.z = 1.0; //(position.z + 10) / 20;

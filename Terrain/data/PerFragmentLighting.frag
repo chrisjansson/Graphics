@@ -28,7 +28,7 @@ void main()
 
 	if(spotEffect < 0.75) 
 	{
-		cosAngIncidence = 0.0;
+		//cosAngIncidence = 0.0;
 	}
 
 	outputColor = (vec4(interpColor, 1.0) * lightIntensity * cosAngIncidence) + vec4(interpColor, 1.0) * vec4(0.2, 0.2, 0.2, 0.2);

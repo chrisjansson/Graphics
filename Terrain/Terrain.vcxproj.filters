@@ -64,6 +64,9 @@
     <ClCompile Include="VertexAttribute.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MeshObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="noise\perlin.h">
@@ -97,6 +100,9 @@
       <Filter>Shader\Uniforms</Filter>
     </ClInclude>
     <ClInclude Include="VertexAttribute.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshObject.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "../../VerticesFromDataGenerator.h"
 #include <cmath>
 #include "../../VertexAttribute.h"
+#include "../../MeshObject.h"
 
 TerrainRenderer::TerrainRenderer(ProjectionSettings projectionSettings) : BaseRenderer(projectionSettings)
 {
@@ -25,14 +26,15 @@ void TerrainRenderer::Render(float elapsedTime)
 	 
 	glm::mat4 modelViewMatrix = glm::lookAt(glm::vec3(0.f, -100.f, 100.f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
 	glm::mat4 rotationMatrix = glm::rotate(modelViewMatrix, 0.f, glm::vec3(0.f, 0.f, 1.f));
+	glm::mat4 cubeMatrix = glm::scale(rotationMatrix, glm::vec3(20.f, 20.f, 20.f));
 
 	float x = 32 * cos(elapsedTime / 10);
 	float y = 32 * sin(elapsedTime / 10);
-	glm::vec4 lightPosition = glm::vec4(x, y, 20, 1.f);
+	glm::vec4 lightPosition = glm::vec4(x, y, 40, 1.f);
 
 	resources.Program.Use();
 
-	resources.Uniforms.ModelToCameraMatrixUniform.Upload(rotationMatrix);
+	resources.Uniforms.ModelToCameraMatrixUniform.Upload(cubeMatrix);
 
 	glm::vec4 lightPositionCameraSpace = rotationMatrix * lightPosition;
 	resources.Uniforms.DirToLightUniform.Upload(lightPositionCameraSpace);
@@ -42,9 +44,11 @@ void TerrainRenderer::Render(float elapsedTime)
 
 	resources.Uniforms.LightIntensityUniform.Upload(glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
 
-	glBindVertexArray(vertexArrayObject);
+	DrawUnitCube();
+
+	/*glBindVertexArray(vertexArrayObject);
 	glDrawElements(GL_TRIANGLES, ((terrainWidth-1)*(terrainHeight-1)*6), GL_UNSIGNED_INT, resources.indices);
-	glBindVertexArray(0);
+	glBindVertexArray(0);*/
 
     glUseProgram(0);
 }
@@ -95,6 +99,8 @@ void TerrainRenderer::InitializeVertexBuffer()
 	VerticesAndIndicesFromData(terrain.GetData(), terrainWidth, terrainHeight, &vertices, &resources.indices);
 
 	CreateVertexArrayObject(vertices, &vertexArrayObject, &resources.vertexBuffer, terrainWidth*terrainHeight);
+
+	InitUnitCube();
 
 	delete[] vertices;
 }
