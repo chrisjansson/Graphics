@@ -3,6 +3,8 @@
 
 void InitUnitCube();
 
+void CalculateNormals();
+
 void SetUnitCubeData();
 void SetFrontData();
 void SetBackData();

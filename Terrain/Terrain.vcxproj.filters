@@ -67,6 +67,12 @@
     <ClCompile Include="MeshObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VertexPositionNormalMeshObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitCube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="noise\perlin.h">
@@ -103,6 +109,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshObject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexPositionNormalMeshObject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitCube.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

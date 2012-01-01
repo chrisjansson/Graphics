@@ -8,7 +8,7 @@ void CreateVertexArrayObject(VertexPositionNormal const *vertices, GLuint *verte
 	glGenBuffers(1, vertexBufferObject);
 	glBindBuffer(GL_ARRAY_BUFFER, *vertexBufferObject);
 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionNormal)*count, &(vertices[0].Position), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(VertexPositionNormal)*count, vertices, GL_STATIC_DRAW);
 	
 	SetVertexAttributePointers();
 
