@@ -5,6 +5,7 @@
 #include "../../Program.h"
 #include "../../Shader.h"
 #include "../../Uniform.h"
+#include "../../UnitCube.h"
 
 struct TerrainRendererResources 
 {
@@ -46,6 +47,8 @@ private:
 	int terrainWidth; 
 	int terrainHeight;
 	GLuint vertexArrayObject;
+
+	UnitCube _unitCube;
 };
 
 #endif

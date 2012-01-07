@@ -3,7 +3,6 @@
 #include "../../VerticesFromDataGenerator.h"
 #include <cmath>
 #include "../../VertexAttribute.h"
-#include "../../MeshObject.h"
 
 TerrainRenderer::TerrainRenderer(ProjectionSettings projectionSettings) : BaseRenderer(projectionSettings)
 {
@@ -44,7 +43,7 @@ void TerrainRenderer::Render(float elapsedTime)
 
 	resources.Uniforms.LightIntensityUniform.Upload(glm::vec4(0.8f, 0.8f, 0.8f, 0.8f));
 
-	DrawUnitCube();
+	_unitCube.Draw();
 
 	/*glBindVertexArray(vertexArrayObject);
 	glDrawElements(GL_TRIANGLES, ((terrainWidth-1)*(terrainHeight-1)*6), GL_UNSIGNED_INT, resources.indices);
@@ -99,8 +98,6 @@ void TerrainRenderer::InitializeVertexBuffer()
 	VerticesAndIndicesFromData(terrain.GetData(), terrainWidth, terrainHeight, &vertices, &resources.indices);
 
 	CreateVertexArrayObject(vertices, &vertexArrayObject, &resources.vertexBuffer, terrainWidth*terrainHeight);
-
-	InitUnitCube();
 
 	delete[] vertices;
 }
