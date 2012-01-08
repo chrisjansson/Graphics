@@ -37,3 +37,5 @@ SFML/Temp
 SFML/lib
 /Terrain/Terrain.exe
 /Terrain/Terrain.exe
+SFML_INSTALL/
+SFML2/build/
