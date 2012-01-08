@@ -74,11 +74,11 @@ void TerrainRenderer::Initialize()
 	g_lightDirection = glm::vec4(100.f, 0.f, 100.0f, 0.0f);
 
 	Shader vs(GL_VERTEX_SHADER);
-	vs.Load("data/PerFragmentLighting.vert");
+	vs.Load("PerFragmentLighting.vert");
 	vs.Compile();
 
 	Shader fs(GL_FRAGMENT_SHADER);
-	fs.Load("data/PerFragmentLighting.frag");
+	fs.Load("PerFragmentLighting.frag");
 	fs.Compile();
 
 	resources.Program.AttachShader(vs);

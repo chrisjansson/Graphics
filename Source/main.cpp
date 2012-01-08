@@ -12,7 +12,7 @@ float startTime;
 int frames=0;
 void PrintFPS()
 {
-	float time = clockObject.GetElapsedTime();
+	float time = clockObject.GetElapsedTime() / 1000.f;
 	float dT = time - oldTime;
 	
 	if(dT > 1)
@@ -62,7 +62,7 @@ int main(int argc, char** argv)
 		}
 		app.SetActive();
 
-		terrainRenderer.Render(clock.GetElapsedTime());
+		terrainRenderer.Render(clock.GetElapsedTime() / 1000.f);
 
 		app.Display();
 
