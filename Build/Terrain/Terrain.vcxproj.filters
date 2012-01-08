@@ -13,5 +13,32 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{ac41ce4c-c3eb-497f-9553-e7635294762f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MeshContainers">
+      <UniqueIdentifier>{80e0cefb-f4f2-47bc-b12d-27253319c7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ProceduralGeneration">
+      <UniqueIdentifier>{52a15d2c-73f3-4f09-a064-436ca87ef194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{bcf64122-3bb4-4c34-915b-83f6753b23a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{3cb21440-ed10-48c4-9225-4b48556bf9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{2d2c5aa3-42de-492c-b00d-c18463402c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Noise">
+      <UniqueIdentifier>{8dc22e17-f340-487c-bd65-6f1243b0a48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer\TerrainRenderer">
+      <UniqueIdentifier>{527fee8d-8eb7-471b-86d1-2987d913ffe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shaders\FragmentLighting">
+      <UniqueIdentifier>{3d7df9f8-3246-4dbf-95f4-af874dd1765f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
