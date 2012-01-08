@@ -71,7 +71,7 @@ GLuint CreateProgram(const std::vector<GLuint>& shaders)
 {
 	GLuint program = glCreateProgram();
 
-	for(int i=0; i < shaders.size(); i++) 
+	for(GLuint i=0; i < shaders.size(); i++) 
 	{
 		glAttachShader(program, shaders[i]);
 	}
@@ -90,7 +90,7 @@ GLuint CreateProgram(const std::vector<GLuint>& shaders)
 
 void DeleteShaderProgram(GLuint program, const std::vector<GLuint>& shaders) 
 {
-	for(int i=0; i < shaders.size(); i++)
+	for(GLuint i=0; i < shaders.size(); i++)
 	{
 		glDetachShader(program, shaders[i]);
 		glDeleteShader(shaders[i]);

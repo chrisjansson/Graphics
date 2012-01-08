@@ -14,7 +14,7 @@ void Program::AttachShader(Shader const &shader)
 
 void Program::Delete()
 {
-	for(int i=0; i < _shaders.size(); i++)
+	for(GLuint i=0; i < _shaders.size(); i++)
 		glDetachShader(_program, _shaders[i].GetShaderObject());
 
 	_shaders.clear();
