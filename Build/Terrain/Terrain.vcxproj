@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B0C9C0F7-DBB1-4C35-88EE-867D9E124520}</ProjectGuid>
+    <ProjectGuid>{F286A803-D544-400F-9747-218C3EEE13D2}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Terrain</RootNamespace>
   </PropertyGroup>
@@ -39,13 +39,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(ProjectDir)/../GLEW/include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../SFML/lib;$(SolutionDir)../GLEW/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)/../SFML/include;$(ProjectDir)/../GLM;$(ProjectDir)/../GLEW;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)../SFML/lib;$(SolutionDir)../GLEW/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -53,12 +49,11 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -69,7 +64,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -79,45 +74,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\GLEW\src\glew.c" />
-    <ClCompile Include="MeshObject.cpp" />
-    <ClCompile Include="UniformUploaders.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="NoiseTerrain.cpp" />
-    <ClCompile Include="noise\perlin.cpp" />
-    <ClCompile Include="Program.cpp" />
-    <ClCompile Include="Renderer\BaseRenderer.cpp" />
-    <ClCompile Include="Renderer\TerrainRenderer\TerrainRenderer.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="ShaderCompiler.cpp" />
-    <ClCompile Include="UnitCube.cpp" />
-    <ClCompile Include="VertexAttribute.cpp" />
-    <ClCompile Include="VertexPositionNormalMeshObject.cpp" />
-    <ClCompile Include="VerticeFromDataGenerator.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MeshObject.h" />
-    <ClInclude Include="UniformUploaders.h" />
-    <ClInclude Include="NoiseTerrain.h" />
-    <ClInclude Include="noise\perlin.h" />
-    <ClInclude Include="Program.h" />
-    <ClInclude Include="Renderer\BaseRenderer.h" />
-    <ClInclude Include="Renderer\TerrainRenderer\TerrainRenderer.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderCompiler.h" />
-    <ClInclude Include="Uniform.h" />
-    <ClInclude Include="UnitCube.h" />
-    <ClInclude Include="VertexAttribute.h" />
-    <ClInclude Include="VertexPositionNormalMeshObject.h" />
-    <ClInclude Include="VerticesFromDataGenerator.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="data\ColorPassthrough.frag" />
-    <None Include="data\DirVertexLighting_PN.vert" />
-    <None Include="data\PerFragmentLighting.frag" />
-    <None Include="data\PerFragmentLighting.vert" />
-    <None Include="data\VertexColors.frag" />
-    <None Include="data\VertexColors.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
