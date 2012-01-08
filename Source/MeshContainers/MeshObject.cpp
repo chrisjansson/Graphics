@@ -1,6 +1,6 @@
-#include "VerticesFromDataGenerator.h"
-#include "VertexAttribute.h"
 #include "MeshObject.h"
+#include "MeshContainers/VertexPositionNormalMeshObject.h"
+#include "Utilities/VertexAttribute.h"
 
 //Front face coordinates
 glm::vec3 p0 = glm::vec3(-0.5f, -0.5f, -0.5f);

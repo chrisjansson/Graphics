@@ -1,7 +1,7 @@
 #ifndef VERTEX_POSITION_NORMAL_MESH_OBJECT
 #define VERTEX_POSITION_NORMAL_MESH_OBJECT
 
-#include "VerticesFromDataGenerator.h"
+#include "Utilities/VerticesFromDataGenerator.h"
 #include <gl/glew.h>
 
 class VertexPositionNormalMeshObject

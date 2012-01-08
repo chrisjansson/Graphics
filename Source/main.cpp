@@ -29,7 +29,7 @@ void PrintFPS()
 
 int main(int argc, char** argv) 
 {
-	sf::WindowSettings settings;
+	sf::ContextSettings settings;
 	settings.DepthBits         = 32; // Request a 24 bits depth buffer
 	settings.StencilBits       = 0;  // Request a 8 bits stencil buffer
 	settings.AntialiasingLevel = 0;  // Request 2 levels of antialiasing
@@ -47,14 +47,14 @@ int main(int argc, char** argv)
 	while(app.IsOpened()) 
 	{
 		sf::Event event;
-		while(app.GetEvent(event)) 
+		while(app.PollEvent(event)) 
 		{
             // Close window : exit
             if (event.Type == sf::Event::Closed)
                 app.Close();
 
             // Escape key : exit
-            if ((event.Type == sf::Event::KeyPressed) && (event.Key.Code == sf::Key::Escape))
+            if ((event.Type == sf::Event::KeyPressed) && (event.Key.Code == sf::Keyboard::Escape))
                 app.Close();
 
 			if (event.Type == sf::Event::Resized)

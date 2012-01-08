@@ -42,8 +42,114 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="..\..\Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Math\Noise\perlin.cpp">
+      <Filter>Source Files\Math\Noise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MeshContainers\MeshObject.cpp">
+      <Filter>Source Files\MeshContainers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MeshContainers\UnitCube.cpp">
+      <Filter>Source Files\MeshContainers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MeshContainers\VertexPositionNormalMeshObject.cpp">
+      <Filter>Source Files\MeshContainers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ProceduralGeneration\NoiseTerrain.cpp">
+      <Filter>Source Files\ProceduralGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Renderer\TerrainRenderer\TerrainRenderer.cpp">
+      <Filter>Source Files\Renderer\TerrainRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Renderer\BaseRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Utilities\Program.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Utilities\Shader.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Utilities\ShaderCompiler.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Utilities\UniformUploaders.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Utilities\VertexAttribute.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Utilities\VerticeFromDataGenerator.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GLEW\src\glew.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\Math\Noise\perlin.h">
+      <Filter>Source Files\Math\Noise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MeshContainers\MeshObject.h">
+      <Filter>Source Files\MeshContainers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MeshContainers\UnitCube.h">
+      <Filter>Source Files\MeshContainers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MeshContainers\VertexPositionNormalMeshObject.h">
+      <Filter>Source Files\MeshContainers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ProceduralGeneration\NoiseTerrain.h">
+      <Filter>Source Files\ProceduralGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Renderer\TerrainRenderer\TerrainRenderer.h">
+      <Filter>Source Files\Renderer\TerrainRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Renderer\BaseRenderer.h">
+      <Filter>Source Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\Program.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\Shader.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\ShaderCompiler.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\Uniform.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\UniformUploaders.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\VertexAttribute.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\VerticesFromDataGenerator.h">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Source\Shaders\ColorPassthrough.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="..\..\Source\Shaders\DirVertexLighting_PN.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="..\..\Source\Shaders\VertexColors.frag">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="..\..\Source\Shaders\VertexColors.vert">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="..\..\Source\Shaders\FramentLighting\PerFragmentLighting.frag">
+      <Filter>Source Files\Shaders\FragmentLighting</Filter>
+    </None>
+    <None Include="..\..\Source\Shaders\FramentLighting\PerFragmentLighting.vert">
+      <Filter>Source Files\Shaders\FragmentLighting</Filter>
+    </None>
   </ItemGroup>
 </Project>

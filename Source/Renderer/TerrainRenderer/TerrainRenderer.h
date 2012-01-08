@@ -1,11 +1,11 @@
 #ifndef TERRAIN_RENDERER_H
 #define TERRAIN_RENDERER_H
 
-#include "../BaseRenderer.h"
-#include "../../Program.h"
-#include "../../Shader.h"
-#include "../../Uniform.h"
-#include "../../UnitCube.h"
+#include "Renderer/BaseRenderer.h"
+#include "Utilities/Program.h"
+#include "Utilities/Shader.h"
+#include "Utilities/Uniform.h"
+#include "MeshContainers/UnitCube.h"
 
 struct TerrainRendererResources 
 {

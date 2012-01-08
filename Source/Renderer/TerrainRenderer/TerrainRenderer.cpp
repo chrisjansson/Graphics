@@ -1,8 +1,10 @@
 #include "TerrainRenderer.h"
-#include "../../NoiseTerrain.h"
-#include "../../VerticesFromDataGenerator.h"
+#include "ProceduralGeneration/NoiseTerrain.h"
+#include "Utilities/VerticesFromDataGenerator.h"
+#include "Utilities/VertexAttribute.h"
+
 #include <cmath>
-#include "../../VertexAttribute.h"
+
 
 TerrainRenderer::TerrainRenderer(ProjectionSettings projectionSettings) : BaseRenderer(projectionSettings)
 {

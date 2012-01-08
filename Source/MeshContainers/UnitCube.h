@@ -2,7 +2,7 @@
 #define UNIT_CUBE_H
 
 #include "VertexPositionNormalMeshObject.h"
-#include "VerticesFromDataGenerator.h"
+#include "Utilities/VerticesFromDataGenerator.h"
 
 
 
