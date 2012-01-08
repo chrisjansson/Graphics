@@ -23,7 +23,6 @@ Thumbs.db
 *.user
 
 # Build Directories
-bin/
 obj/
 Debug/
 Release/
@@ -33,8 +32,6 @@ ipch/
 # http://support.microsoft.com/kb/830611
 *.webinfo
 
-SFML/Temp
-SFML/lib
 /Terrain/Terrain.exe
 /Terrain/Terrain.exe
 SFML_INSTALL/
