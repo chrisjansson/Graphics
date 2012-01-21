@@ -28,7 +28,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/Network/Export.hpp>
+#include <SFML/System/Time.hpp>
 
 
 namespace sf
@@ -39,7 +40,7 @@ class Socket;
 /// \brief Multiplexer that allows to read from multiple sockets
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API SocketSelector
+class SFML_NETWORK_API SocketSelector
 {
 public :
 
@@ -111,14 +112,14 @@ public :
     /// If you use a timeout and no socket is ready before the timeout
     /// is over, the function returns false.
     ///
-    /// \param timeout Maximum time to wait, in milliseconds (use 0 for infinity)
+    /// \param timeout Maximum time to wait, (use Time::Zero for infinity)
     ///
     /// \return True if there are sockets ready, false otherwise
     ///
     /// \see IsReady
     ///
     ////////////////////////////////////////////////////////////
-    bool Wait(Uint32 timeout = 0);
+    bool Wait(Time timeout = Time::Zero);
 
     ////////////////////////////////////////////////////////////
     /// \brief Test a socket to know if it is ready to receive data

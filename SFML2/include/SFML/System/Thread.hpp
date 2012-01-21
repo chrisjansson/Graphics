@@ -28,7 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/System/Export.hpp>
 #include <SFML/System/NonCopyable.hpp>
 #include <cstdlib>
 
@@ -45,7 +45,7 @@ namespace priv
 /// \brief Utility class to manipulate threads
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Thread : NonCopyable
+class SFML_SYSTEM_API Thread : NonCopyable
 {
 public :
 
@@ -186,8 +186,8 @@ private :
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    priv::ThreadImpl* myImpl; ///< OS-specific implementation of the thread
-    priv::ThreadFunc* myFunction; ///< Abstraction of the function to run
+    priv::ThreadImpl* myImpl;       ///< OS-specific implementation of the thread
+    priv::ThreadFunc* myEntryPoint; ///< Abstraction of the function to run
 };
 
 #include <SFML/System/Thread.inl>

@@ -38,7 +38,7 @@ namespace sf
 ////////////////////////////////////////////////////////////
 Music::Music() :
 myFile    (new priv::SoundFile),
-myDuration(0)
+myDuration()
 {
 
 }
@@ -106,7 +106,7 @@ bool Music::OpenFromStream(InputStream& stream)
 
 
 ////////////////////////////////////////////////////////////
-Uint32 Music::GetDuration() const
+Time Music::GetDuration() const
 {
     return myDuration;
 }
@@ -118,16 +118,16 @@ bool Music::OnGetData(SoundStream::Chunk& data)
     Lock lock(myMutex);
 
     // Fill the chunk parameters
-    data.Samples   = &mySamples[0];
-    data.NbSamples = myFile->Read(&mySamples[0], mySamples.size());
+    data.Samples     = &mySamples[0];
+    data.SampleCount = myFile->Read(&mySamples[0], mySamples.size());
 
     // Check if we have reached the end of the audio file
-    return data.NbSamples == mySamples.size();
+    return data.SampleCount == mySamples.size();
 }
 
 
 ////////////////////////////////////////////////////////////
-void Music::OnSeek(Uint32 timeOffset)
+void Music::OnSeek(Time timeOffset)
 {
     Lock lock(myMutex);
 
@@ -139,8 +139,7 @@ void Music::OnSeek(Uint32 timeOffset)
 void Music::Initialize()
 {
     // Compute the music duration
-    Uint64 samples = myFile->GetSampleCount();
-    myDuration = static_cast<Uint32>(1000 * samples / myFile->GetSampleRate() / myFile->GetChannelCount());
+    myDuration = Seconds(static_cast<float>(myFile->GetSampleCount()) / myFile->GetSampleRate() / myFile->GetChannelCount());
 
     // Resize the internal buffer so that it can contain 1 second of audio samples
     mySamples.resize(myFile->GetSampleRate() * myFile->GetChannelCount());

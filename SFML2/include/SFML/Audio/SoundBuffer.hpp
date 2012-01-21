@@ -28,7 +28,8 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Config.hpp>
+#include <SFML/Audio/Export.hpp>
+#include <SFML/System/Time.hpp>
 #include <string>
 #include <vector>
 #include <set>
@@ -48,7 +49,7 @@ class InputStream;
 /// \brief Storage for audio samples defining a sound
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API SoundBuffer
+class SFML_AUDIO_API SoundBuffer
 {
 public :
 
@@ -212,12 +213,12 @@ public :
     ////////////////////////////////////////////////////////////
     /// \brief Get the total duration of the sound
     ///
-    /// \return Sound duration, in milliseconds
+    /// \return Sound duration
     ///
     /// \see GetSampleRate, GetChannelCount
     ///
     ////////////////////////////////////////////////////////////
-    Uint32 GetDuration() const;
+    Time GetDuration() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Overload of assignment operator
@@ -280,7 +281,7 @@ private :
     ////////////////////////////////////////////////////////////
     unsigned int       myBuffer;   ///< OpenAL buffer identifier
     std::vector<Int16> mySamples;  ///< Samples buffer
-    Uint32             myDuration; ///< Sound duration, in milliseconds
+    Time               myDuration; ///< Sound duration
     mutable SoundList  mySounds;   ///< List of sounds that are using this buffer
 };
 

@@ -28,8 +28,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/System/NonCopyable.hpp>
+#include <SFML/Network/Export.hpp>
 #include <SFML/Network/TcpSocket.hpp>
+#include <SFML/System/NonCopyable.hpp>
+#include <SFML/System/Time.hpp>
 #include <string>
 #include <vector>
 
@@ -42,7 +44,7 @@ class IpAddress;
 /// \brief A FTP client
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Ftp : NonCopyable
+class SFML_NETWORK_API Ftp : NonCopyable
 {
 public :
 
@@ -61,7 +63,7 @@ public :
     /// \brief Define a FTP response
     ///
     ////////////////////////////////////////////////////////////
-    class SFML_API Response
+    class SFML_NETWORK_API Response
     {
     public :
 
@@ -183,7 +185,7 @@ public :
     /// \brief Specialization of FTP response returning a directory
     ///
     ////////////////////////////////////////////////////////////
-    class SFML_API DirectoryResponse : public Response
+    class SFML_NETWORK_API DirectoryResponse : public Response
     {
     public :
 
@@ -216,7 +218,7 @@ public :
     /// \brief Specialization of FTP response returning a
     ///        filename lisiting
     ////////////////////////////////////////////////////////////
-    class SFML_API ListingResponse : public Response
+    class SFML_NETWORK_API ListingResponse : public Response
     {
     public :
 
@@ -264,19 +266,19 @@ public :
     /// This function tries to connect to the server so it may take
     /// a while to complete, especially if the server is not
     /// reachable. To avoid blocking your application for too long,
-    /// you can use a timeout. The default value, 0, means that the
+    /// you can use a timeout. The default value, Time::Zero, means that the
     /// system timeout will be used (which is usually pretty long).
     ///
     /// \param server  Name or address of the FTP server to connect to
     /// \param port    Port used for the connection
-    /// \param timeout Maximum time to wait, in milliseconds
+    /// \param timeout Maximum time to wait
     ///
     /// \return Server response to the request
     ///
     /// \see Disconnect
     ///
     ////////////////////////////////////////////////////////////
-    Response Connect(const IpAddress& server, unsigned short port = 21, Uint32 timeout = 0);
+    Response Connect(const IpAddress& server, unsigned short port = 21, Time timeout = Time::Zero);
 
     ////////////////////////////////////////////////////////////
     /// \brief Close the connection with the server

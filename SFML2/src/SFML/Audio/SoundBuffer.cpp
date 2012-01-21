@@ -39,7 +39,7 @@ namespace sf
 ////////////////////////////////////////////////////////////
 SoundBuffer::SoundBuffer() :
 myBuffer  (0),
-myDuration(0)
+myDuration()
 {
     priv::EnsureALInit();
 
@@ -189,7 +189,7 @@ unsigned int SoundBuffer::GetChannelCount() const
 
 
 ////////////////////////////////////////////////////////////
-Uint32 SoundBuffer::GetDuration() const
+Time SoundBuffer::GetDuration() const
 {
     return myDuration;
 }
@@ -213,13 +213,13 @@ SoundBuffer& SoundBuffer::operator =(const SoundBuffer& right)
 bool SoundBuffer::Initialize(priv::SoundFile& file)
 {
     // Retrieve the sound parameters
-    std::size_t  nbSamples    = file.GetSampleCount();
+    std::size_t  sampleCount  = file.GetSampleCount();
     unsigned int channelCount = file.GetChannelCount();
     unsigned int sampleRate   = file.GetSampleRate();
 
     // Read the samples from the provided file
-    mySamples.resize(nbSamples);
-    if (file.Read(&mySamples[0], nbSamples) == nbSamples)
+    mySamples.resize(sampleCount);
+    if (file.Read(&mySamples[0], sampleCount) == sampleCount)
     {
         // Update the internal buffer with the new samples
         return Update(channelCount, sampleRate);
@@ -253,7 +253,7 @@ bool SoundBuffer::Update(unsigned int channelCount, unsigned int sampleRate)
     ALCheck(alBufferData(myBuffer, format, &mySamples[0], size, sampleRate));
 
     // Compute the duration
-    myDuration = static_cast<Uint32>(1000 * mySamples.size() / sampleRate / channelCount);
+    myDuration = Milliseconds(1000 * mySamples.size() / sampleRate / channelCount);
 
     return true;
 }

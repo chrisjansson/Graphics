@@ -28,7 +28,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Audio/Export.hpp>
 #include <SFML/Audio/SoundSource.hpp>
+#include <SFML/System/Time.hpp>
 #include <cstdlib>
 
 
@@ -40,7 +42,7 @@ class SoundBuffer;
 /// \brief Regular sound that can be played in the audio environment
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Sound : public SoundSource
+class SFML_AUDIO_API Sound : public SoundSource
 {
 public :
 
@@ -144,12 +146,12 @@ public :
     /// The playing position can be changed when the sound is
     /// either paused or playing.
     ///
-    /// \param timeOffset New playing position, in milliseconds
+    /// \param timeOffset New playing position, from the beginning of the sound
     ///
     /// \see GetPlayingOffset
     ///
     ////////////////////////////////////////////////////////////
-    void SetPlayingOffset(Uint32 timeOffset);
+    void SetPlayingOffset(Time timeOffset);
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the audio buffer attached to the sound
@@ -172,12 +174,12 @@ public :
     ////////////////////////////////////////////////////////////
     /// \brief Get the current playing position of the sound
     ///
-    /// \return Current playing position, in milliseconds
+    /// \return Current playing position, from the beginning of the sound
     ///
     /// \see SetPlayingOffset
     ///
     ////////////////////////////////////////////////////////////
-    Uint32 GetPlayingOffset() const;
+    Time GetPlayingOffset() const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the current status of the sound (stopped, paused, playing)

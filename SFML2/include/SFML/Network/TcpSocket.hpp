@@ -28,7 +28,9 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Network/Export.hpp>
 #include <SFML/Network/Socket.hpp>
+#include <SFML/System/Time.hpp>
 
 
 namespace sf
@@ -41,7 +43,7 @@ class Packet;
 /// \brief Specialized socket using the TCP protocol
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API TcpSocket : public Socket
+class SFML_NETWORK_API TcpSocket : public Socket
 {
 public :
 
@@ -99,14 +101,14 @@ public :
     ///
     /// \param remoteAddress Address of the remote peer
     /// \param remotePort    Port of the remote peer
-    /// \param timeout       Optional maximum time to wait, in milliseconds
+    /// \param timeout       Optional maximum time to wait
     ///
     /// \return Status code
     ///
     /// \see Disconnect
     ///
     ////////////////////////////////////////////////////////////
-    Status Connect(const IpAddress& remoteAddress, unsigned short remotePort, Uint32 timeout = 0);
+    Status Connect(const IpAddress& remoteAddress, unsigned short remotePort, Time timeout = Time::Zero);
 
     ////////////////////////////////////////////////////////////
     /// \brief Disconnect the socket from its remote peer

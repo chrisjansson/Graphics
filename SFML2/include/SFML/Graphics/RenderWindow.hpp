@@ -28,6 +28,7 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Window/Window.hpp>
@@ -40,7 +41,7 @@ namespace sf
 /// \brief Window that can serve as a target for 2D drawing
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API RenderWindow : public Window, public RenderTarget
+class SFML_GRAPHICS_API RenderWindow : public Window, public RenderTarget
 {
 public :
 
@@ -205,7 +206,7 @@ private :
 /// window.SetFramerateLimit(60);
 ///
 /// // The main loop - ends as soon as the window is closed
-/// while (window.IsOpened())
+/// while (window.IsOpen())
 /// {
 ///    // Event processing
 ///    sf::Event event;
@@ -247,7 +248,7 @@ private :
 /// ...
 ///
 /// // Start the rendering loop
-/// while (window.IsOpened())
+/// while (window.IsOpen())
 /// {
 ///     // Process events
 ///     ...

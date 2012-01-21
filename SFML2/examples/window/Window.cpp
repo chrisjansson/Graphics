@@ -34,7 +34,7 @@ int main()
     gluPerspective(90.f, 1.f, 1.f, 500.f);
 
     // Start the game loop
-    while (window.IsOpened())
+    while (window.IsOpen())
     {
         // Process events
         sf::Event event;
@@ -65,9 +65,9 @@ int main()
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         glTranslatef(0.f, 0.f, -200.f);
-        glRotatef(clock.GetElapsedTime() * 0.05f, 1.f, 0.f, 0.f);
-        glRotatef(clock.GetElapsedTime() * 0.03f, 0.f, 1.f, 0.f);
-        glRotatef(clock.GetElapsedTime() * 0.09f, 0.f, 0.f, 1.f);
+        glRotatef(clock.GetElapsedTime().AsSeconds() * 0.05f, 1.f, 0.f, 0.f);
+        glRotatef(clock.GetElapsedTime().AsSeconds() * 0.03f, 0.f, 1.f, 0.f);
+        glRotatef(clock.GetElapsedTime().AsSeconds() * 0.09f, 0.f, 0.f, 1.f);
 
         // Draw a cube
         glBegin(GL_QUADS);

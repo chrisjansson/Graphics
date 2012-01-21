@@ -28,8 +28,10 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
+#include <SFML/Audio/Export.hpp>
 #include <SFML/Audio/SoundStream.hpp>
 #include <SFML/System/Mutex.hpp>
+#include <SFML/System/Time.hpp>
 #include <string>
 #include <vector>
 
@@ -47,7 +49,7 @@ class InputStream;
 /// \brief Streamed music played from an audio file
 ///
 ////////////////////////////////////////////////////////////
-class SFML_API Music : public SoundStream
+class SFML_AUDIO_API Music : public SoundStream
 {
 public :
 
@@ -121,10 +123,10 @@ public :
     ////////////////////////////////////////////////////////////
     /// \brief Get the total duration of the music
     ///
-    /// \return Music duration, in milliseconds
+    /// \return Music duration
     ///
     ////////////////////////////////////////////////////////////
-    Uint32 GetDuration() const;
+    Time GetDuration() const;
 
 protected :
 
@@ -144,10 +146,10 @@ protected :
     ////////////////////////////////////////////////////////////
     /// \brief Change the current playing position in the stream source
     ///
-    /// \param timeOffset New playing position, in milliseconds
+    /// \param timeOffset New playing position, from the beginning of the music
     ///
     ////////////////////////////////////////////////////////////
-    virtual void OnSeek(Uint32 timeOffset);
+    virtual void OnSeek(Time timeOffset);
 
 private :
 
@@ -161,7 +163,7 @@ private :
     // Member data
     ////////////////////////////////////////////////////////////
     priv::SoundFile*   myFile;     ///< Sound file
-    Uint32             myDuration; ///< Music duration, in milliseconds
+    Time               myDuration; ///< Music duration
     std::vector<Int16> mySamples;  ///< Temporary buffer of samples
     Mutex              myMutex;    ///< Mutex protecting the data
 };

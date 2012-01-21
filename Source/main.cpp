@@ -12,13 +12,13 @@ float startTime;
 int frames=0;
 void PrintFPS()
 {
-	float time = clockObject.GetElapsedTime() / 1000.f;
-	float dT = time - oldTime;
+	sf::Time time = clockObject.GetElapsedTime();
+	float dT = time.AsSeconds() - oldTime;
 	
 	if(dT > 1)
 	{
 		std::cout << frames << std::endl;
-		oldTime = time;
+		oldTime = time.AsSeconds();
 		frames = 0;
 	} 
 	else 
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
 
 	sf::Clock clock = sf::Clock();
 
-	while(app.IsOpened()) 
+	while(app.IsOpen()) 
 	{
 		sf::Event event;
 		while(app.PollEvent(event)) 
@@ -62,7 +62,8 @@ int main(int argc, char** argv)
 		}
 		app.SetActive();
 
-		terrainRenderer.Render(clock.GetElapsedTime() / 1000.f);
+		sf::Time dT = clock.GetElapsedTime();
+		terrainRenderer.Render(dT.AsSeconds());
 
 		app.Display();
 

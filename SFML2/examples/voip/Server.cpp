@@ -78,7 +78,7 @@ private :
 
         // No new data has arrived since last update : wait until we get some
         while ((myOffset >= mySamples.size()) && !myHasFinished)
-            sf::Sleep(10);
+            sf::Sleep(sf::Milliseconds(10));
 
         // Copy samples into a local buffer to avoid synchronization problems
         // (don't forget that we run in two separate threads)
@@ -88,8 +88,8 @@ private :
         }
 
         // Fill audio data to pass to the stream
-        data.Samples   = &myTempBuffer[0];
-        data.NbSamples = myTempBuffer.size();
+        data.Samples     = &myTempBuffer[0];
+        data.SampleCount = myTempBuffer.size();
 
         // Update the playing offset
         myOffset += myTempBuffer.size();
@@ -101,9 +101,9 @@ private :
     /// /see SoundStream::OnSeek
     ///
     ////////////////////////////////////////////////////////////
-    virtual void OnSeek(sf::Uint32 timeOffset)
+    virtual void OnSeek(sf::Time timeOffset)
     {
-        myOffset = timeOffset * GetSampleRate() * GetChannelCount() / 1000;
+        myOffset = timeOffset.AsMilliseconds() * GetSampleRate() * GetChannelCount() / 1000;
     }
 
     ////////////////////////////////////////////////////////////
@@ -126,14 +126,14 @@ private :
             if (id == audioData)
             {
                 // Extract audio samples from the packet, and append it to our samples buffer
-                const sf::Int16* samples   = reinterpret_cast<const sf::Int16*>(packet.GetData() + 1);
-                std::size_t      nbSamples = (packet.GetDataSize() - 1) / sizeof(sf::Int16);
+                const sf::Int16* samples     = reinterpret_cast<const sf::Int16*>(packet.GetData() + 1);
+                std::size_t      sampleCount = (packet.GetDataSize() - 1) / sizeof(sf::Int16);
 
                 // Don't forget that the other thread can access the sample array at any time
                 // (so we protect any operation on it with the mutex)
                 {
                     sf::Lock lock(myMutex);
-                    std::copy(samples, samples + nbSamples, std::back_inserter(mySamples));
+                    std::copy(samples, samples + sampleCount, std::back_inserter(mySamples));
                 }
             }
             else if (id == endOfStream)
@@ -179,7 +179,7 @@ void DoServer(unsigned short port)
     while (audioStream.GetStatus() != sf::SoundStream::Stopped)
     {
         // Leave some CPU time for other threads
-        sf::Sleep(100);
+        sf::Sleep(sf::Milliseconds(100));
     }
 
     std::cin.ignore(10000, '\n');
@@ -195,6 +195,6 @@ void DoServer(unsigned short port)
     while (audioStream.GetStatus() != sf::SoundStream::Stopped)
     {
         // Leave some CPU time for other threads
-        sf::Sleep(100);
+        sf::Sleep(sf::Milliseconds(100));
     }
 }
