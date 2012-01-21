@@ -4,6 +4,7 @@
 
 #include "Renderer\BaseRenderer.h"
 #include "Renderer\TerrainRenderer\TerrainRenderer.h"
+#include "Utilities\ObjParser\ObjParser.hpp"
 
 sf::Clock clockObject;
 
@@ -39,10 +40,17 @@ int main(int argc, char** argv)
 
 	ProjectionSettings projectionSettings;
 	TerrainRenderer terrainRenderer(projectionSettings);
-	terrainRenderer.Initialize();
-	terrainRenderer.ReSize(800, 600);
+	//terrainRenderer.Initialize();
+	//terrainRenderer.ReSize(800, 600);
 
 	sf::Clock clock = sf::Clock();
+
+	ObjParser parser;
+	parser.Parse("buddha.obj");
+
+	std::cout << "Parse time: " << clock.GetElapsedTime().AsSeconds() << std::endl;
+	clock.Restart();
+
 
 	while(app.IsOpen()) 
 	{

@@ -20,6 +20,7 @@
     <ClCompile Include="..\..\Source\ProceduralGeneration\NoiseTerrain.cpp" />
     <ClCompile Include="..\..\Source\Renderer\BaseRenderer.cpp" />
     <ClCompile Include="..\..\Source\Renderer\TerrainRenderer\TerrainRenderer.cpp" />
+    <ClCompile Include="..\..\Source\Utilities\ObjParser\ObjParser.cpp" />
     <ClCompile Include="..\..\Source\Utilities\Program.cpp" />
     <ClCompile Include="..\..\Source\Utilities\Shader.cpp" />
     <ClCompile Include="..\..\Source\Utilities\ShaderCompiler.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="..\..\Source\ProceduralGeneration\NoiseTerrain.h" />
     <ClInclude Include="..\..\Source\Renderer\BaseRenderer.h" />
     <ClInclude Include="..\..\Source\Renderer\TerrainRenderer\TerrainRenderer.h" />
+    <ClInclude Include="..\..\Source\Utilities\ObjParser\ObjParser.hpp" />
     <ClInclude Include="..\..\Source\Utilities\Program.h" />
     <ClInclude Include="..\..\Source\Utilities\Shader.h" />
     <ClInclude Include="..\..\Source\Utilities\ShaderCompiler.h" />

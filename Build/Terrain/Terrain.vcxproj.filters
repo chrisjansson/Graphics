@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Shaders\FragmentLighting">
       <UniqueIdentifier>{3d7df9f8-3246-4dbf-95f4-af874dd1765f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utilities\ObjParser">
+      <UniqueIdentifier>{38e51f2e-83c9-4b8e-919e-4ccdc55ca99b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\main.cpp">
@@ -87,6 +90,9 @@
     <ClCompile Include="..\..\GLEW\src\glew.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Utilities\ObjParser\ObjParser.cpp">
+      <Filter>Source Files\Utilities\ObjParser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\Math\Noise\perlin.h">
@@ -130,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\Utilities\VerticesFromDataGenerator.h">
       <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Utilities\ObjParser\ObjParser.hpp">
+      <Filter>Source Files\Utilities\ObjParser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
