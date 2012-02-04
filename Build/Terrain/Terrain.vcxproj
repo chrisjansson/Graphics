@@ -90,7 +90,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)/../../SFML_INSTALL/include;$(SolutionDir)/../../GLM/;$(SolutionDir)/../../GLEW/include/;$(SolutionDir)/../../Source/;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)/../../SFML_INSTALL/lib;$(LibraryPath)</LibraryPath>
-    <SourcePath>$(SolutionDir)/../../GLEW/src;$(SourcePath)</SourcePath>
+    <SourcePath>$(SolutionDir)/../../GLEW/src;$(SolutionDir)/../../Source;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
