@@ -40,8 +40,8 @@ int main(int argc, char** argv)
 
 	ProjectionSettings projectionSettings;
 	TerrainRenderer terrainRenderer(projectionSettings);
-	//terrainRenderer.Initialize();
-	//terrainRenderer.ReSize(800, 600);
+	terrainRenderer.Initialize();
+	terrainRenderer.ReSize(800, 600);
 
 	sf::Clock clock = sf::Clock();
 

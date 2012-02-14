@@ -1,7 +1,11 @@
 #include "ObjParser.hpp"
+#include <vector>
+#include <exception>
+#include "..\VerticesFromDataGenerator.h"
+#include <stdlib.h>
 
 ObjParser::ObjParser() : _vCount(0), _vtCount(0), _vnCount(0), _fCount(0),
-	_vertexInsertIndex(0), _vertexTextureCoordinateInsertIndex(0), _faceInsertIndex(0), _vertexNormalInsertIndex(0)
+	_vertexIndex(0), _textureIndex(0), _faceIndex(0), _normalIndex(0)
 {
 }
 
@@ -20,7 +24,10 @@ void ObjParser::Parse(const char * filePath)
 	}
 	rewind(inFile);
 
+
 	AllocateBuffers();
+
+	//_fCount = 0;
 
 	while(!feof(inFile)) 
 	{
@@ -59,45 +66,34 @@ void ObjParser::ParseLine( const std::string &line )
 	else if(IsVertexKeyword(keyword)) 
 	{
 		//Vertex
-		int index = _vertexInsertIndex * 3;
 		float x, y, z;
 		lineStream >> x >> y >> z;
 
-		_vertices[index + 0] = x;
-		_vertices[index + 1] = y;
-		_vertices[index + 2] = z;
-
-		_vertexInsertIndex++;
+		glm::vec3 vec(x, y, z);
+		_vertices[_vertexIndex++] = vec;
 	}
-	else if(IsVertexTextureCoordinateKeyword(keyword)) 
+	else if(IsTextureKeyword(keyword)) 
 	{
 		//TextureCoordinate
-		int index = _vertexTextureCoordinateInsertIndex * 2;
 		float x, y;
 		lineStream >> x >> y;
 
-		_vertices[index + 0] = x;
-		_vertices[index + 1] = y;
-
-		_vertexTextureCoordinateInsertIndex++;
+		glm::vec2 vec(x, y);
+		_textures[_textureIndex++] = vec;
 	}
-	else if(IsVertexNormalKeyword(keyword)) 
+	else if(IsNormalKeyword(keyword)) 
 	{
 		//VertexNormal
-		int index = _vertexNormalInsertIndex * 3;
 		float x, y, z;
 		lineStream >> x >> y >> z;
 
-		_vertices[index + 0] = x;
-		_vertices[index + 1] = y;
-		_vertices[index + 2] = z;
-
-		_vertexNormalInsertIndex++;
+		glm::vec3 vec(x, y, z);
+		_normals[_normalIndex++] = vec;
 	}
 	else if(IsFaceKeyword(keyword)) 
 	{
-		//Face
-		//_fCount++;
+		ParseFace(lineStream);
+
 	}
 
 	//Unrecognized keyword
@@ -126,12 +122,12 @@ void ObjParser::CountData(const std::string &line)
 		//Vertex
 		_vCount++;
 	}
-	else if(IsVertexTextureCoordinateKeyword(keyword)) 
+	else if(IsTextureKeyword(keyword)) 
 	{
 		//TextureCoordinate
 		_vtCount++;
 	}
-	else if(IsVertexNormalKeyword(keyword)) 
+	else if(IsNormalKeyword(keyword)) 
 	{
 		//VertexNormal
 		_vnCount++;
@@ -155,12 +151,12 @@ bool ObjParser::IsVertexKeyword( const std::string &line )
 	return line.compare("v") == 0;
 }
 
-bool ObjParser::IsVertexTextureCoordinateKeyword( const std::string &line )
+bool ObjParser::IsTextureKeyword( const std::string &line )
 {
 	return line.compare("vt") == 0;
 }
 
-bool ObjParser::IsVertexNormalKeyword( const std::string &line )
+bool ObjParser::IsNormalKeyword( const std::string &line )
 {
 	return line.compare("vn") == 0;
 }
@@ -172,9 +168,46 @@ bool ObjParser::IsFaceKeyword( const std::string &line )
 
 void ObjParser::AllocateBuffers()
 {
-	_vertices = new float[_vCount * 3];
-	_vertexCoordinates = new float[_vCount * 2];
-	_vertexNormals = new float[_vCount * 3];
+	_vertices = new glm::detail::tvec3<float>[_vCount];
+	_normals = new glm::detail::tvec3<float>[_vnCount];
+	_textures = new glm::detail::tvec2<float>[_vtCount];
 
 	//TODO: allocate space for face container
+}
+
+void ObjParser::ParseFace( std::stringstream &lineStream )
+{
+	//std::vector<std::string> faceFields;
+
+	//std::string faceField;
+	//lineStream >> faceField;
+	//while(faceField.length() > 0 && !lineStream.eof()) 
+	//{
+	//	faceFields.push_back(faceField);
+	//	lineStream >> faceField;
+	//}
+
+	//for (int i = 0; i < faceFields.size(); i++)
+	//{
+	//	int vertexNumber = atoi(faceFields[i].c_str());
+
+	//	VertexPositionNormal vertex;
+	//	vertex.Position = _vertices[vertexNumber - 1];
+	//	vertex.Normal = _vertices[vertexNumber - 1];
+
+	//	//_faces[_faceIndex++] = vertex;
+	//}
+
+	////Triangle
+	//if(faceFields.size() == 3) 
+	//{
+	//	_fCount++;			
+	//}
+}
+
+ObjParser::~ObjParser()
+{
+	delete[] _vertices;
+	delete[] _normals;
+	delete[] _textures;
 }
