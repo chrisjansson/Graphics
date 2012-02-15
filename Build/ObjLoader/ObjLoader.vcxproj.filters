@@ -19,6 +19,9 @@
     <Filter Include="Source Files\ObjLoader\TypeParsers">
       <UniqueIdentifier>{50e43a20-5f01-4ba0-9580-399fa1021193}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ObjLoader\DataStore">
+      <UniqueIdentifier>{c500224a-f008-456c-8a7a-d4d17e536c2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +39,9 @@
     <ClCompile Include="..\..\Source\ObjLoader\TypeParser\TextureParser.cpp">
       <Filter>Source Files\ObjLoader\TypeParsers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ObjLoader\DataStore\DataStore.cpp">
+      <Filter>Source Files\ObjLoader\DataStore</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\ObjLoader\ObjLoader.hpp">
@@ -52,6 +58,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\TextureParser.hpp">
       <Filter>Source Files\ObjLoader\TypeParsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ObjLoader\DataStore\DataStore.hpp">
+      <Filter>Source Files\ObjLoader\DataStore</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ class NormalParser : ITypeParser
 {
 public:
 	void ParseLine(const std::string &line);
-	void CanParseLine(const std::string &line);
+	bool CanParseLine(const std::string &keyWord);
 };
 
 #endif

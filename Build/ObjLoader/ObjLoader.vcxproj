@@ -39,9 +39,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)/../../GLM;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)/../../GLM;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -74,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ObjLoader\DataStore\DataStore.cpp" />
     <ClCompile Include="..\..\Source\ObjLoader\ObjLoader.cpp" />
     <ClCompile Include="..\..\Source\ObjLoader\TypeParser\NormalParser.cpp" />
     <ClCompile Include="..\..\Source\ObjLoader\TypeParser\TextureParser.cpp" />
@@ -81,6 +84,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ObjLoader\DataStore\DataStore.hpp" />
     <ClInclude Include="..\..\Source\ObjLoader\ObjLoader.hpp" />
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\ITypeParser.hpp" />
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\NormalParser.hpp" />
