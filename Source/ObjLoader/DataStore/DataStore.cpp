@@ -1,38 +1,38 @@
 #include "DataStore.hpp"
 
 //TODO: Assert that array addition is within bounds
-void DataStore::AddNormal( Normal normal )
+void DataStore::AddNormal(Normal normal)
 {
 	_normals[_normalIndex++] = normal;
 }
 
-Normal DataStore::GetNormal( int i )
+Normal DataStore::GetNormal(int i)
 {
 	return _normals[i];
 }
 
-void DataStore::AddVertex( Vertex vertex )
+void DataStore::AddVertex(Vertex vertex)
 {
 	_vertices[_verticeIndex++] = vertex;
 }
 
-Vertex DataStore::GetVertex( int i )
+Vertex DataStore::GetVertex(int i)
 {
 	return _vertices[i];
 }
 
-void DataStore::AddTexture( Texture texture )
+void DataStore::AddTexture(Texture texture)
 {
 	_textures[_textureIndex++] = texture;
 }
 
-Texture DataStore::GetTexture( int i )
+Texture DataStore::GetTexture(int i)
 {
 	return _textures[i];
 }
 
 
-void DataStore::Initalize( int vertices, int normals, int textures )
+void DataStore::Initalize(int vertices, int normals, int textures)
 {
 	_vertices = new Vertex[vertices];
 	_normals = new Normal[normals];

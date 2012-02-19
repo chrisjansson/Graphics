@@ -2,12 +2,12 @@
 
 TextureParser t;
 
-void TextureParser::ParseLine( const std::string &line )
+void TextureParser::ParseLine(const std::string &line)
 {
 
 }
 
-bool TextureParser::CanParseLine( const std::string &keyWord )
+bool TextureParser::CanParseLine(const std::string &keyWord)
 {
 	return keyWord.compare("v") == 0;
 }
