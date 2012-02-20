@@ -41,14 +41,14 @@ void CopyStream(std::istream &input, std::ostream &output)
 
 int main(void) 
 {
-	clock_t initialTime = clock();
-
 	std::ifstream inputStream("buddha.obj", std::ifstream::in);
 	//std::ifstream inputStream("cube.obj", std::ifstream::in);
 	std::stringstream memoryStream;
 
 	CopyStream(inputStream, memoryStream);
 	inputStream.close();
+
+	clock_t initialTime = clock();
 
 	DataStore dataStore;
 	ObjLoader loader(dataStore);

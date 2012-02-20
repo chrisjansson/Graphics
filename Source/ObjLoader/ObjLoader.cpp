@@ -4,17 +4,14 @@ void ObjLoader::Parse(std::istream &lineStream)
 {
 	CountData(lineStream);
 
-	lineStream.clear();           
-	lineStream.seekg(0, std::ios::beg);
+	_dataStore.Initalize(_dataCount.Vertices, _dataCount.Normals, _dataCount.VertexTextures);
 
-
+	RewindStream(lineStream);
 }
 
 void ObjLoader::CountData(std::istream &stream)
 {
 	std::string	currentLine;
-	
-	int v=0, n=0, vt=0, f=0;
 
 	while(stream.good()) 
 	{
@@ -25,29 +22,45 @@ void ObjLoader::CountData(std::istream &stream)
 		std::string keyWord;
 		lineStream >> keyWord;
 
-		if(keyWord == "v")
-		{
-			v++;
-		}
-		else if(keyWord == "vn") 
-		{
-			n++;
-		}
-		else if(keyWord == "vt")
-		{
-			vt++;
-		}
-		else if(keyWord == "f") 
-		{
-			f++;
-		}
-		else if(keyWord == "#")
-		{
-
-		}
+		CountKeyWord(keyWord);
 	}
+}
+
+void ObjLoader::CountKeyWord(std::string keyWord)
+{
+	//Possibly just a list of parsers and use can parse?
+	if(keyWord == "v")
+	{
+		_dataCount.Vertices++;
+	}
+	else if(keyWord == "f") 
+	{
+		_dataCount.Faces++;
+	}
+	else if(keyWord == "vn") 
+	{
+		_dataCount.Normals++;
+	}
+	else if(keyWord == "vt")
+	{
+		_dataCount.VertexTextures++;
+	}
+	else if(keyWord == "#")
+	{
+
+	}
+}
+
+void ObjLoader::RewindStream( std::istream &lineStream )
+{
+	lineStream.clear();           
+	lineStream.seekg(0, std::ios::beg);
 }
 
 ObjLoader::ObjLoader(DataStore &dataStore) : _dataStore(dataStore), _vertexParser(dataStore), _normalParser(dataStore), _textureParser(dataStore)
 {
 }
+
+
+
+
