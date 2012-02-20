@@ -24,9 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\ObjLoader\ObjLoader.cpp">
       <Filter>Source Files\ObjLoader</Filter>
     </ClCompile>
@@ -41,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\ObjLoader\DataStore\DataStore.cpp">
       <Filter>Source Files\ObjLoader\DataStore</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ObjLoader\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\ObjLoader\DataStore\DataStore.hpp">
       <Filter>Source Files\ObjLoader\DataStore</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ObjLoader\TypeParser\TypeParsers.hpp">
+      <Filter>Source Files\ObjLoader\TypeParsers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

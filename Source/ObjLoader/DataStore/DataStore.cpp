@@ -39,9 +39,17 @@ void DataStore::Initalize(int vertices, int normals, int textures)
 	_textures = new Texture[textures];
 }
 
-DataStore::DataStore()  : _numberOfVertices(0), _verticeIndex(0), _numberOfNormals(0), _normalIndex(0), _numberOfTextures(0), _textureIndex(0)
+DataStore::DataStore()  : 
+	_numberOfVertices(0), 
+	_verticeIndex(0), 
+	_numberOfNormals(0), 
+	_normalIndex(0), 
+	_numberOfTextures(0), 
+	_textureIndex(0),
+	_vertices(NULL),
+	_normals(NULL),
+	_textures(NULL)
 {
-
 }
 
 DataStore::~DataStore()
