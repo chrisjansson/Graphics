@@ -1,6 +1,6 @@
 #include "TypeParserBase.hpp"
 
-TypeParserBase::TypeParserBase() : _count(0)
+TypeParserBase::TypeParserBase(DataStore &dataStore) : _count(0), _dataStore(dataStore)
 {
 
 }

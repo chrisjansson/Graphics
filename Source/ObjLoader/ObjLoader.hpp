@@ -8,16 +8,6 @@
 #include <iostream>
 #include <vector>
 
-struct DataCount
-{
-	DataCount() : Vertices(0), Normals(0), VertexTextures(0), Faces(0) {}
-
-	int Vertices;
-	int Normals;
-	int VertexTextures;
-	int Faces;
-};
-
 class ObjLoader
 {
 public:
@@ -31,10 +21,9 @@ private:
 	VertexParser _vertexParser;
 	NormalParser _normalParser;
 	TextureParser _textureParser;
+	FaceParser _faceParser;
 
 	std::vector<ITypeParser*> _parsers;
-
-	DataCount _dataCount; 
 
 	void CountData(std::istream &stream);
 	void CountKeyWord( std::string keyWord );

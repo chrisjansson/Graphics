@@ -17,7 +17,7 @@ bool TextureParser::CanParseLine(const std::string &keyWord)
 	return keyWord.compare("vt") == 0;
 }
 
-TextureParser::TextureParser(DataStore &dataStore) : _dataStore(dataStore)
+TextureParser::TextureParser(DataStore &dataStore) : TypeParserBase(dataStore)
 {
 
 }

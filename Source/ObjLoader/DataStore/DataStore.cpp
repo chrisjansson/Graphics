@@ -53,16 +53,19 @@ DataStore::~DataStore()
 
 void DataStore::AllocateSpaceForNormals(int count)
 {
+	_numberOfNormals = count;
 	_normals = new Normal[count];
 }
 
 void DataStore::AllocateSpaceForVertices(int count)
 {
+	_numberOfVertices = count;
 	_vertices = new Vertex[count];
 }
 
 void DataStore::AllocateSpaceForTextures(int count)
 {
+	_numberOfTextures = count;
 	_textures = new Texture[count];
 }
 

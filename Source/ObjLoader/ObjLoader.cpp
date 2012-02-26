@@ -28,7 +28,7 @@ void ObjLoader::CountData(std::istream &stream)
 
 void ObjLoader::CountKeyWord(std::string keyWord)
 {
-	for (int i = 0; i < _parsers.size(); i++)
+	for (std::size_t i = 0; i < _parsers.size(); i++)
 	{
 		_parsers[i]->CountKeyword(keyWord);
 	}
@@ -40,16 +40,22 @@ void ObjLoader::RewindStream( std::istream &lineStream )
 	lineStream.seekg(0, std::ios::beg);
 }
 
-ObjLoader::ObjLoader(DataStore &dataStore) : _dataStore(dataStore), _vertexParser(dataStore), _normalParser(dataStore), _textureParser(dataStore)
+ObjLoader::ObjLoader(DataStore &dataStore) : 
+		_dataStore(dataStore), 
+		_vertexParser(dataStore), 
+		_normalParser(dataStore), 
+		_textureParser(dataStore),
+		_faceParser(dataStore)
 {
 	_parsers.push_back(&_vertexParser);
 	_parsers.push_back(&_normalParser);
 	_parsers.push_back(&_textureParser);
+	_parsers.push_back(&_faceParser);
 }
 
 void ObjLoader::AllocateData()
 {
-	for (int i = 0; i < _parsers.size(); i++)
+	for (std::size_t i = 0; i < _parsers.size(); i++)
 	{
 		_parsers[i]->AllocateSpace();
 	}

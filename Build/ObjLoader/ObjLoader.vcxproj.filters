@@ -45,6 +45,9 @@
     <ClCompile Include="..\..\Source\ObjLoader\TypeParser\TypeParserBase.cpp">
       <Filter>Source Files\ObjLoader\TypeParsers</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ObjLoader\TypeParser\FaceParser.cpp">
+      <Filter>Source Files\ObjLoader\TypeParsers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\ObjLoader\ObjLoader.hpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files\ObjLoader\TypeParsers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\TypeParserBase.hpp">
+      <Filter>Source Files\ObjLoader\TypeParsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ObjLoader\TypeParser\FaceParser.hpp">
       <Filter>Source Files\ObjLoader\TypeParsers</Filter>
     </ClInclude>
   </ItemGroup>

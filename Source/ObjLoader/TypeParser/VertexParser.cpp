@@ -17,7 +17,7 @@ bool VertexParser::CanParseLine(const std::string &keyWord)
 	return keyWord.compare("v") == 0;
 }
 
-VertexParser::VertexParser(DataStore &dataStore) : _dataStore(dataStore)
+VertexParser::VertexParser(DataStore &dataStore) : TypeParserBase(dataStore)
 {
 	
 }

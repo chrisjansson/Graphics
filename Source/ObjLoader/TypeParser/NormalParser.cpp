@@ -17,7 +17,7 @@ bool NormalParser::CanParseLine(const std::string &keyWord)
 	return keyWord.compare("vn") == 0;
 }
 
-NormalParser::NormalParser(DataStore &dataStore) : _dataStore(dataStore)
+NormalParser::NormalParser(DataStore &dataStore) : TypeParserBase(dataStore)
 {
 
 }

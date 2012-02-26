@@ -4,5 +4,6 @@
 #include "NormalParser.hpp"
 #include "TextureParser.hpp"
 #include "VertexParser.hpp"
+#include "FaceParser.hpp"
 
 #endif

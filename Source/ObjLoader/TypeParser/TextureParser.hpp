@@ -14,9 +14,6 @@ public:
 	void ParseLine(const std::string &line);
 	bool CanParseLine(const std::string &keyWord);
 	void AllocateSpace();
-
-private:
-	DataStore &_dataStore;
 };
 
 #endif
