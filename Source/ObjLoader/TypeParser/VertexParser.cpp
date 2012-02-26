@@ -1,15 +1,5 @@
 #include "VertexParser.hpp"
 
-
-void VertexParser::CountKeyword(const std::string &line)
-{
-	if(CanParseLine(line)) 
-	{
-		_count++;
-	}
-}
-
-
 void VertexParser::ParseLine(const std::string &line)
 {
 	std::stringstream lineStream;
@@ -27,7 +17,7 @@ bool VertexParser::CanParseLine(const std::string &keyWord)
 	return keyWord.compare("v") == 0;
 }
 
-VertexParser::VertexParser(DataStore &dataStore) : _dataStore(dataStore), _count(0)
+VertexParser::VertexParser(DataStore &dataStore) : _dataStore(dataStore)
 {
 	
 }

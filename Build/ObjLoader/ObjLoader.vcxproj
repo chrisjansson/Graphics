@@ -81,6 +81,7 @@
     <ClCompile Include="..\..\Source\ObjLoader\ObjLoader.cpp" />
     <ClCompile Include="..\..\Source\ObjLoader\TypeParser\NormalParser.cpp" />
     <ClCompile Include="..\..\Source\ObjLoader\TypeParser\TextureParser.cpp" />
+    <ClCompile Include="..\..\Source\ObjLoader\TypeParser\TypeParserBase.cpp" />
     <ClCompile Include="..\..\Source\ObjLoader\TypeParser\VertexParser.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +90,7 @@
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\ITypeParser.hpp" />
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\NormalParser.hpp" />
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\TextureParser.hpp" />
+    <ClInclude Include="..\..\Source\ObjLoader\TypeParser\TypeParserBase.hpp" />
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\TypeParsers.hpp" />
     <ClInclude Include="..\..\Source\ObjLoader\TypeParser\VertexParser.hpp" />
   </ItemGroup>

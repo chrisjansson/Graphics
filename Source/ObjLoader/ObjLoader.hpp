@@ -23,7 +23,6 @@ public:
 	ObjLoader(DataStore &dataStore);
 
 	void Parse(std::istream &lineStream);
-
 	void RewindStream( std::istream &lineStream );
 
 private:
@@ -37,7 +36,6 @@ private:
 	DataCount _dataCount; 
 
 	void CountData(std::istream &stream);
-
 	void CountKeyWord( std::string keyWord );
 
 };

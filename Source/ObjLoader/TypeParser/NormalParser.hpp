@@ -1,23 +1,21 @@
 #ifndef NORMAL_PARSER_H
 #define NORMAL_PARSER_H
 
-#include "ITypeParser.hpp"
+#include "TypeParserBase.hpp"
 #include "../DataStore/DataStore.hpp"
 
 #include <sstream>
 
-class NormalParser : public ITypeParser
+class NormalParser : public TypeParserBase
 {
 public:
 	NormalParser(DataStore &dataStore);
 
-	void CountKeyword(const std::string &line);
 	void ParseLine(const std::string &line);
 	bool CanParseLine(const std::string &keyWord);
 	
 private:
 	DataStore &_dataStore;
-	int _count;
 };
 
 #endif
