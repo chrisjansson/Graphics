@@ -1,5 +1,13 @@
 #include "NormalParser.hpp"
 
+void NormalParser::CountKeyword(const std::string &line)
+{
+	if(CanParseLine(line))
+	{
+		_count++;
+	}
+}
+
 void NormalParser::ParseLine(const std::string &line)
 {
 	std::stringstream lineStream;
@@ -17,7 +25,7 @@ bool NormalParser::CanParseLine(const std::string &keyWord)
 	return keyWord.compare("vn") == 0;
 }
 
-NormalParser::NormalParser(DataStore &dataStore) : _dataStore(dataStore)
+NormalParser::NormalParser(DataStore &dataStore) : _dataStore(dataStore), _count(0)
 {
 
 }

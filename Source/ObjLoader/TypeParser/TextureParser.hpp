@@ -6,16 +6,18 @@
 
 #include <sstream>
 
-class TextureParser : ITypeParser
+class TextureParser : public ITypeParser
 {
 public:
 	TextureParser(DataStore &dataStore);
 
+	void CountKeyword(const std::string &line);
 	void ParseLine(const std::string &line);
 	bool CanParseLine(const std::string &keyWord);
 
 private:
 	DataStore &_dataStore;
+	int _count;
 };
 
 #endif

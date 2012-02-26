@@ -29,26 +29,32 @@ void ObjLoader::CountData(std::istream &stream)
 void ObjLoader::CountKeyWord(std::string keyWord)
 {
 	//Possibly just a list of parsers and use can parse?
-	if(keyWord == "v")
+	
+	for (int i = 0; i < 3; i++)
 	{
-		_dataCount.Vertices++;
+		_parsers[i]->CountKeyword(keyWord);
 	}
-	else if(keyWord == "f") 
-	{
-		_dataCount.Faces++;
-	}
-	else if(keyWord == "vn") 
-	{
-		_dataCount.Normals++;
-	}
-	else if(keyWord == "vt")
-	{
-		_dataCount.VertexTextures++;
-	}
-	else if(keyWord == "#")
-	{
 
-	}
+	//if(keyWord == "v")
+	//{
+	//	_dataCount.Vertices++;
+	//}
+	//else if(keyWord == "f") 
+	//{
+	//	_dataCount.Faces++;
+	//}
+	//else if(keyWord == "vn") 
+	//{
+	//	_dataCount.Normals++;
+	//}
+	//else if(keyWord == "vt")
+	//{
+	//	_dataCount.VertexTextures++;
+	//}
+	//else if(keyWord == "#")
+	//{
+
+	//}
 }
 
 void ObjLoader::RewindStream( std::istream &lineStream )
@@ -59,6 +65,9 @@ void ObjLoader::RewindStream( std::istream &lineStream )
 
 ObjLoader::ObjLoader(DataStore &dataStore) : _dataStore(dataStore), _vertexParser(dataStore), _normalParser(dataStore), _textureParser(dataStore)
 {
+	_parsers[0] = &_vertexParser;
+	_parsers[1] = &_normalParser;
+	_parsers[2] = &_textureParser;
 }
 
 

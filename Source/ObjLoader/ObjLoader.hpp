@@ -32,6 +32,8 @@ private:
 	NormalParser _normalParser;
 	TextureParser _textureParser;
 
+	ITypeParser *_parsers[4];
+
 	DataCount _dataCount; 
 
 	void CountData(std::istream &stream);

@@ -6,16 +6,18 @@
 
 #include <sstream>
 
-class NormalParser : ITypeParser
+class NormalParser : public ITypeParser
 {
 public:
 	NormalParser(DataStore &dataStore);
 
+	void CountKeyword(const std::string &line);
 	void ParseLine(const std::string &line);
 	bool CanParseLine(const std::string &keyWord);
 	
 private:
 	DataStore &_dataStore;
+	int _count;
 };
 
 #endif

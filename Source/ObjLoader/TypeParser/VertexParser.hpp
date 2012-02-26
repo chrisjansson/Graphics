@@ -6,16 +6,18 @@
 
 #include <sstream>
 
-class VertexParser : ITypeParser
+class VertexParser : public ITypeParser
 {
 public:
 	VertexParser(DataStore &dataStore);
 
+	void CountKeyword(const std::string &line);
 	void ParseLine(const std::string &line);
 	bool CanParseLine(const std::string &line);
 
 private:
 	DataStore &_dataStore;
+	int _count;
 };
 
 #endif
