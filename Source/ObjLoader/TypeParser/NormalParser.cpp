@@ -21,3 +21,8 @@ NormalParser::NormalParser(DataStore &dataStore) : _dataStore(dataStore)
 {
 
 }
+
+void NormalParser::AllocateSpace()
+{
+	_dataStore.AllocateSpaceForNormals(_count);
+}

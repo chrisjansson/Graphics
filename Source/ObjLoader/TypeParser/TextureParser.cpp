@@ -21,3 +21,8 @@ TextureParser::TextureParser(DataStore &dataStore) : _dataStore(dataStore)
 {
 
 }
+
+void TextureParser::AllocateSpace()
+{
+	_dataStore.AllocateSpaceForTextures(_count);
+}

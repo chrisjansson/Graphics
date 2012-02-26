@@ -4,7 +4,7 @@ void ObjLoader::Parse(std::istream &lineStream)
 {
 	CountData(lineStream);
 
-	_dataStore.Initalize(_dataCount.Vertices, _dataCount.Normals, _dataCount.VertexTextures);
+	AllocateData();
 
 	RewindStream(lineStream);
 }
@@ -28,7 +28,7 @@ void ObjLoader::CountData(std::istream &stream)
 
 void ObjLoader::CountKeyWord(std::string keyWord)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < _parsers.size(); i++)
 	{
 		_parsers[i]->CountKeyword(keyWord);
 	}
@@ -42,9 +42,17 @@ void ObjLoader::RewindStream( std::istream &lineStream )
 
 ObjLoader::ObjLoader(DataStore &dataStore) : _dataStore(dataStore), _vertexParser(dataStore), _normalParser(dataStore), _textureParser(dataStore)
 {
-	_parsers[0] = &_vertexParser;
-	_parsers[1] = &_normalParser;
-	_parsers[2] = &_textureParser;
+	_parsers.push_back(&_vertexParser);
+	_parsers.push_back(&_normalParser);
+	_parsers.push_back(&_textureParser);
+}
+
+void ObjLoader::AllocateData()
+{
+	for (int i = 0; i < _parsers.size(); i++)
+	{
+		_parsers[i]->AllocateSpace();
+	}
 }
 
 

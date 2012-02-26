@@ -6,6 +6,7 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
 
 struct DataCount
 {
@@ -31,13 +32,13 @@ private:
 	NormalParser _normalParser;
 	TextureParser _textureParser;
 
-	ITypeParser *_parsers[4];
+	std::vector<ITypeParser*> _parsers;
 
 	DataCount _dataCount; 
 
 	void CountData(std::istream &stream);
 	void CountKeyWord( std::string keyWord );
-
+	void AllocateData();
 };
 
 #endif

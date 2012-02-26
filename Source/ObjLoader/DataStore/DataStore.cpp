@@ -31,14 +31,6 @@ Texture DataStore::GetTexture(int i)
 	return _textures[i];
 }
 
-
-void DataStore::Initalize(int vertices, int normals, int textures)
-{
-	_vertices = new Vertex[vertices];
-	_normals = new Normal[normals];
-	_textures = new Texture[textures];
-}
-
 DataStore::DataStore()  : 
 	_numberOfVertices(0), 
 	_verticeIndex(0), 
@@ -57,6 +49,21 @@ DataStore::~DataStore()
 	delete[] _vertices;
 	delete[] _normals;
 	delete[] _textures;
+}
+
+void DataStore::AllocateSpaceForNormals(int count)
+{
+	_normals = new Normal[count];
+}
+
+void DataStore::AllocateSpaceForVertices(int count)
+{
+	_vertices = new Vertex[count];
+}
+
+void DataStore::AllocateSpaceForTextures(int count)
+{
+	_textures = new Texture[count];
 }
 
 

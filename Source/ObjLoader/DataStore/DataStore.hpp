@@ -15,6 +15,11 @@ public:
 	
 	void Initalize(int vertices, int normals, int textures);
 
+	void AllocateSpaceForNormals(int count);
+	void AllocateSpaceForVertices(int count);
+	void AllocateSpaceForTextures(int count);
+	void AllocateSpaceForFaces(int count);
+
 	void AddNormal(Normal normal);
 	Normal GetNormal(int i);
 

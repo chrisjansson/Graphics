@@ -21,3 +21,8 @@ VertexParser::VertexParser(DataStore &dataStore) : _dataStore(dataStore)
 {
 	
 }
+
+void VertexParser::AllocateSpace()
+{
+	_dataStore.AllocateSpaceForVertices(_count);
+}
